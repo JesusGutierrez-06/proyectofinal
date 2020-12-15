@@ -11,6 +11,7 @@
     <br>
     <form action="{{ route('ofertas.store') }}" method="post">
         @csrf
+        <input type="hidden" name="empresa_id" value="{{$todos['empresa']->id}}">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Titulo de la oferta laboral</label>
@@ -99,7 +100,7 @@
                 </div>
             </div>
             <div class="col-md-2 mb-3">
-                <button class="btn btn-primary" type="submit">Publicar</button>
+                <button class="btn btn-primary" type="submit">Publicar Oferta Laboral</button>
             </div>
             <div class="col-md-5 mb-3">
             </div>
@@ -138,3 +139,4 @@
 
 
 @endsection
+

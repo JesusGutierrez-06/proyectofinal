@@ -5,7 +5,7 @@
     
 <center> <h1>Registrar Empresa</h1>
 <h3>Los campos con * son obligatorio <h3></center>
-  <form action="{{route('empresa.store')}}" method="post" >
+  <form action="{{route('empresa.store')}}" enctype="multipart/form-data" method="post" >
     @csrf
     <input type="hidden" name="users_id" value="{{$todos['admin']}}">
     <div class="form-row">
@@ -75,8 +75,7 @@
       </div>
       <div class="col-md-4 mb-3">
         <label for="validationCustom01">Logo de la empresa</label>
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+            <input type="file" accept="image/*" class="custom-file-input" name="image" id="validatedCustomFile" required>
             <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
             <div class="invalid-feedback">Example invalid custom file feedback</div>
           </div>

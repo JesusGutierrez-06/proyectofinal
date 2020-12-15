@@ -5,8 +5,9 @@
 
     <center>
         <h1>Editar Datos Personales</h1>
-        <h3>Los campos con * no son editables <h3>
-    </center>
+        <img class="card-img-top" style="width: 8rem;"
+        src="{{ Storage::url($estudiante->foto)}}" alt="Card image cap">
+             </center>
     <form action="{{ route('estudiante.update', $estudiante) }}" method="post">
         @csrf
         @method('put')
@@ -34,16 +35,25 @@
                 <input type="text" class="form-control" name="matricula" value="{{ $estudiante->matricula }}"
                     placeholder="Matriula estudiantil">
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-2 mb-3">
                 <label>Celular</label>
                 <input type="text" class="form-control" name="celular" value="{{ $estudiante->celular }}"
                     placeholder="Celular">
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-2 mb-3">
                 <label>Telefono</label>
                 <input type="text" class="form-control" name="telefono" value="{{ $estudiante->telefono }}"
                     placeholder="Telefono">
             </div>
+            
+            <div class="col-md-4 mb-3">
+                <label>Fotografía</label>
+                <div class="custom-file">
+                    <input type="file" name="image" accept="image/*" class="custom-file-input" id="validatedCustomFile" required>
+                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                     </div>
+                </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-3">
@@ -70,15 +80,14 @@
 
             <div class="col-md-2 mb-3">
                 <label>Grupo sanguineo</label>
-
                 <select class="custom-select" name="tipo_sangre_id">
-                    {{-- <option value="{{ $estudiante->tipo_sangreid }}">
-                        {{ $estudiante->tipo_sangreid }}
-                    </option> --}}
-                    <option value="1">O +</option>
-                    <option value="2">O -</option>
-                    <option value="3">AB +</option>
-                    <option value="3">AB -</option>
+                    @foreach ($tipo_sangre as $tipos_sangres)
+                    @if ($tipos_sangres->id == $estudiante->tipo_sangre_id)
+                        <option selected value="{{ $tipos_sangres->id }}">{{ $tipos_sangres->nombre }}</option>
+                    @else
+                        <option value="{{ $tipos_sangres->id }}">{{ $tipos_sangres->nombre }}</option>
+                    @endif
+                @endforeach
                 </select>
             </div>
             <div class="col-md-2 mb-3">

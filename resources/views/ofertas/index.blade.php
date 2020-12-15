@@ -20,7 +20,7 @@
                         <tr>
                             <td rowspan="4">
                                 <img class="card-img-top" style="width: 8rem;"
-                                    src="{{ asset('static/assets/img/download.png') }}" alt="Card image cap">
+                                    src="{{ Storage::url($oferta->logo)}}" alt="Card image cap">
                             </td>
                           <td scope="row"><a href="{{route('ofertas.show',$oferta->id)}}"> {{ $oferta->titulo }}</a> </td>
                         </tr>

@@ -58,6 +58,7 @@ class EmpresaController extends Controller
         $empresa->celular =$request->celular;
         $empresa->telefono =$request->telefono;
         $empresa->nit =$request->nit;
+        $empresa->logo= $request->image->store('public');
         $empresa->estado =1;
         // $empresa->users_id=$request->users_id;
         
@@ -96,6 +97,10 @@ class EmpresaController extends Controller
     }
     public function update(Request $request, Empresa $empresa){
 
+        $request->validate([
+            'image'=> 'image'
+        ]);
+
         $empresa->dpto_id =$request->dpto_id;
         $empresa->users_id=$request->users_id;
         $empresa->nombre =$request->nombre;
@@ -105,6 +110,7 @@ class EmpresaController extends Controller
         $empresa->celular =$request->celular;
         $empresa->telefono =$request->telefono;
         $empresa->nit =$request->nit;
+        $empresa->logo= $request->image->store('public');
         $empresa->estado =1;
         // dd($empresa);
         $empresa->save();

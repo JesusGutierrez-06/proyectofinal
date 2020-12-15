@@ -24,6 +24,7 @@ class Estudiante extends Model
         'telefono',
         'celular',
         'dni',
+        'foto',
         'direccion',
         'estado',
         'fechaalta',

@@ -13,7 +13,7 @@
                         
                         <div class="card">
                           <center>  <img class="card-img-top" style="width: 8rem;"
-                            src="{{ asset('static/assets/img/download.png') }}" alt="Card image cap">
+                            src="{{ Storage::url($data['empresa']->logo)}}" alt="Card image cap">
                           </center>
                         </div>
                         {{$data['departamento']->nombre}} - Bolivia.<br>

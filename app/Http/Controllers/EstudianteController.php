@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 class EstudianteController extends Controller
 {
-    //
     public function index(Request $request){
-        $buscar=$request->get('buscar');
+        $buscar= $request->get('buscar');
         $data= DB::table('estudiante')
         ->join('provincia','provincia.id','=','estudiante.provincia_id')
         ->join('tipo_sangre','tipo_sangre.id','=','estudiante.tipo_sangre_id')
@@ -29,10 +28,8 @@ class EstudianteController extends Controller
         ->orderBy('estudiante.id','asc')
         ->paginate(5);
         // return dd($data);
-        // $data = Admin::All();
-        
+        // $data = Admin::All();        
         return view('estudiante.index', compact('data','buscar'));
-
         // return view('estudiante.index');
     }
     public function create($id){
@@ -42,43 +39,41 @@ class EstudianteController extends Controller
         $tipo_sangre = TipoSangre::All();
         $genero = Genero::All();
         $admin = Admin::find($id);
-        $todos['genero']=$genero;
-        $todos['tipo_sangre']=$tipo_sangre;
-        $todos['provincia']=$provincia;
-        $todos['departamento']=$departamento;
-        $todos['estado_civil']=$estado_civil;
-        $todos['admin']=$admin;
+        $todos['genero']= $genero;
+        $todos['tipo_sangre']= $tipo_sangre;
+        $todos['provincia']= $provincia;
+        $todos['departamento']= $departamento;
+        $todos['estado_civil']= $estado_civil;
+        $todos['admin']= $admin;
         // return $todos['admin'];
         // dd($todos);
         return view('estudiante.create', compact('todos'));
         // return view('estudiante.create');
     }
-    // public function getProvincia(Request $request,$id)
-    // {
-    //     if($request->ajax()){
-    //         $provincias = Provincias::provincias($id);
-    //         return response()->json($provincias);
-    //     }
-    // }
     public function store(Request $request){
         // return $request->all();
-        
+        $request->validate([
+            'image'=> 'image'
+        ]);
+
         $estudiante = new Estudiante();
-        $estudiante->genero_id =$request->genero_id;
-        $estudiante->estado_civil_id =$request->estado_civil_id;
-        $estudiante->tipo_sangre_id =$request->tipo_sangre_id;
-        $estudiante->provincia_id =$request->provincia_id;
+        $estudiante->genero_id = $request->genero_id;
+        $estudiante->estado_civil_id = $request->estado_civil_id;
+        $estudiante->tipo_sangre_id = $request->tipo_sangre_id;
+        $estudiante->provincia_id = $request->provincia_id;
         $estudiante->users_id = $request->users_id;
-        $estudiante->matricula =$request->matricula;
-        $estudiante->nombre =$request->nombre;
-        $estudiante->apellidop =$request->apellidop;
-        $estudiante->apellidom =$request->apellidom;
-        $estudiante->fechanac =$request->fechanac;
-        $estudiante->telefono =$request->telefono;
-        $estudiante->celular =$request->celular;
-        $estudiante->dni =$request->dni;
-        $estudiante->direccion =$request->direccion;
+        $estudiante->matricula = $request->matricula;
+        $estudiante->nombre = $request->nombre;
+        $estudiante->apellidop = $request->apellidop;
+        $estudiante->apellidom = $request->apellidom;
+        $estudiante->fechanac = $request->fechanac;
+        $estudiante->telefono = $request->telefono;
+        $estudiante->celular = $request->celular;
+        $estudiante->dni = $request->dni;
+        $estudiante->foto= $request->image->store('public');
+        $estudiante->direccion = $request->direccion;
         $estudiante->estado=1;
+// dd($estudiante);
         $estudiante->save();
         return redirect()->route('estudiante.show',$estudiante );
     }
@@ -92,7 +87,7 @@ class EstudianteController extends Controller
         $data['departamento'] = Departamento::find($departamento->dpto_id);
         $data['users'] = Admin::find($estudiante->users_id);
         $data['estado_civil'] = EstadoCivil::find($estudiante->estado_civil_id);
-        $data['estudiante']=$estudiante;
+        $data['estudiante']= $estudiante;
         // return $data;        
         return view('estudiante.show', compact('data'));
     }
@@ -106,21 +101,24 @@ class EstudianteController extends Controller
         return view('estudiante.edit', compact('estudiante','departamento','provincia','estado_civil','tipo_sangre','genero'));
     }
     public function update(Request $request, Estudiante $estudiante){
-
-        $estudiante->genero_id =$request->genero_id;
-        $estudiante->estado_civil_id =$request->estado_civil_id;
-        $estudiante->tipo_sangre_id =$request->tipo_sangre_id;
-        $estudiante->provincia_id =$request->provincia_id;
-        $estudiante->users_id =$request->users_id;
-        $estudiante->matricula =$request->matricula;
-        $estudiante->nombre =$request->nombre;
-        $estudiante->apellidop =$request->apellidop;
-        $estudiante->apellidom =$request->apellidom;
-        $estudiante->fechanac =$request->fechanac;
-        $estudiante->telefono =$request->telefono;
-        $estudiante->celular =$request->celular;
-        $estudiante->dni =$request->dni;
-        $estudiante->direccion =$request->direccion;
+        $request->validate([
+            'image'=> 'image'
+        ]);
+        $estudiante->genero_id = $request->genero_id;
+        $estudiante->estado_civil_id = $request->estado_civil_id;
+        $estudiante->tipo_sangre_id = $request->tipo_sangre_id;
+        $estudiante->provincia_id = $request->provincia_id;
+        $estudiante->users_id = $request->users_id;
+        $estudiante->matricula = $request->matricula;
+        $estudiante->nombre = $request->nombre;
+        $estudiante->apellidop = $request->apellidop;
+        $estudiante->apellidom = $request->apellidom;
+        $estudiante->fechanac = $request->fechanac;
+        $estudiante->telefono = $request->telefono;
+        $estudiante->celular = $request->celular;
+        $estudiante->dni = $request->dni;
+        $estudiante->foto= $request->image->store('public');
+        $estudiante->direccion = $request->direccion;
         $estudiante->estado=1;
         $estudiante->save();
         return redirect()->route('estudiante.index');

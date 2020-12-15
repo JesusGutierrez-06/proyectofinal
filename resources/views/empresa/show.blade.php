@@ -53,7 +53,9 @@
                     </tr>                    
                 </tbody>
             </table>
-            <img src="{{asset('static/assets/img/aprobado.png')}}" width="200px">
+            <img class="card-img-top" style="width: 8rem;"
+            src="{{ Storage::url($data['empresa']->logo)}}" alt="Card image cap">
+            
         </div>
     </div><br>
 

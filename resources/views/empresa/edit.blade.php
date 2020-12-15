@@ -7,7 +7,7 @@
     <h1>Editar Datos de la empresa</h1>
     <h3>Los campos con * no son editables <h3>
 </center>
-<form action="{{ route('empresa.update', $empresa) }}" method="post">
+<form action="{{ route('empresa.update', $empresa) }}" enctype="multipart/form-data" method="post">
     @csrf
     @method('put')
     <input type="hidden" name="users_id" value="{{$empresa->users_id}}">
@@ -81,11 +81,13 @@
       </div>
       <div class="col-md-4 mb-3">
         <label for="validationCustom01">Logo de la empresa</label>
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+             <div class="custom-file">
+            <input type="file" name="image" accept="image/*" class="custom-file-input" id="validatedCustomFile" required>
             <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
             <div class="invalid-feedback">Example invalid custom file feedback</div>
-          </div>
+            <img class="card-img-top" style="width: 8rem;"
+            src="{{ Storage::url($empresa->logo)}}" alt="Card image cap">
+              </div>
         </div>
     </div>
   
