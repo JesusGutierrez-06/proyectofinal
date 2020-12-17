@@ -1,7 +1,7 @@
+@extends(Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : (Auth::user()->tipo_usuario_id == '3' ?
+'empresa.layout' : 'layout'))
 
-    @extends(Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : 'empresa.layout')
-
-    @section('title', 'Registro Oferta')
+@section('title', 'Registro Oferta')
 
 @section('contenido')
     <center>
@@ -11,13 +11,13 @@
     <br>
     <form action="{{ route('ofertas.store') }}" method="post">
         @csrf
-        <input type="hidden" name="empresa_id" value="{{$todos['empresa']->id}}">
+        <input type="hidden" name="empresa_id" value="{{ $todos['empresa']->id }}">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Titulo de la oferta laboral</label>
                 <input type="text" class="form-control" name="titulo" placeholder="Nombre de la oferta laboral">
             </div>
-        <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3">
                 <label>Celular</label>
                 <input type="number" class="form-control" name="celular" placeholder="Celular">
             </div>
@@ -28,7 +28,7 @@
                     Bien!
                 </div>
             </div>
-            </div>
+        </div>
         <div class="form-row">
             <div class="col-md-2 mb-3">
                 <label>Vacantes</label>
@@ -77,20 +77,20 @@
         </div>
         <div class="form-row">
             <div class="col-md-6 mb-3">
-            <label>Requisitos</label>
-            <textarea name="requisito" class="form-control" cols="30" rows="10"
-                placeholder="Requisitos para la oferta"></textarea>
-        </div>
-        <div class="col-md-6 mb-3">
-            <label>Descripción de la oferta laboral</label>
-            <textarea name="descripcion" class="form-control" cols="30" rows="10"
-                placeholder="Funciones a realizar"></textarea>
-            <div class="valid-feedback">
-                Bien!
+                <label>Requisitos</label>
+                <textarea name="requisito" class="form-control" cols="30" rows="10"
+                    placeholder="Requisitos para la oferta"></textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Descripción de la oferta laboral</label>
+                <textarea name="descripcion" class="form-control" cols="30" rows="10"
+                    placeholder="Funciones a realizar"></textarea>
+                <div class="valid-feedback">
+                    Bien!
+                </div>
             </div>
         </div>
-</div>
-    <div class="form-row">
+        <div class="form-row">
             <div class="col-md-5 mb-3">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
@@ -139,4 +139,3 @@
 
 
 @endsection
-

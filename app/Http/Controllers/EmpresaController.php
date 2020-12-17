@@ -51,10 +51,10 @@ class EmpresaController extends Controller
         
         $empresa = new Empresa();
         $empresa->dpto_id =$request->dpto_id;
-        $empresa->nombre =$request->nombre;
-        $empresa->direccion =$request->direccion;
-        $empresa->url_pagina =$request->url_pagina;
-        $empresa->descripcion =$request->descripcion;
+        $empresa->nombre = ucwords(strtolower($request->nombre));
+        $empresa->direccion = ucwords(strtolower($request->direccion));
+        $empresa->url_pagina = ucwords(strtolower($request->url_pagina));
+        $empresa->descripcion = ucwords(strtolower($request->descripcion));
         $empresa->celular =$request->celular;
         $empresa->telefono =$request->telefono;
         $empresa->nit =$request->nit;
@@ -89,10 +89,16 @@ class EmpresaController extends Controller
         return view('empresa.show', compact('data'));
     }
 
-    public function edit(Empresa $empresa){
-        $departamento = Departamento::All();
-        // dd($departamento);
+    public function edit($empresa){
+        $empresa= explode(':',$empresa);
         
+        if (count($empresa)>1) {
+            $empresa = Empresa::Where('users_id','=',$empresa[1])->first();
+        }else{
+            $empresa = Empresa::Where('id','=',$empresa[0])->first();
+        }
+        $departamento = Departamento::All();
+        // dd($empresa);
         return view('empresa.edit', compact('empresa','departamento'));
     }
     public function update(Request $request, Empresa $empresa){
@@ -103,10 +109,10 @@ class EmpresaController extends Controller
 
         $empresa->dpto_id =$request->dpto_id;
         $empresa->users_id=$request->users_id;
-        $empresa->nombre =$request->nombre;
-        $empresa->direccion =$request->direccion;
-        $empresa->url_pagina =$request->url_pagina;
-        $empresa->descripcion =$request->descripcion;
+        $empresa->nombre = ucwords(strtolower($request->nombre));
+        $empresa->direccion = ucwords(strtolower($request->direccion));
+        $empresa->url_pagina = ucwords(strtolower($request->url_pagina));
+        $empresa->descripcion = ucwords(strtolower($request->descripcion));
         $empresa->celular =$request->celular;
         $empresa->telefono =$request->telefono;
         $empresa->nit =$request->nit;

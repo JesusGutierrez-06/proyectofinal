@@ -28,6 +28,69 @@
   <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
   <!-- Languaje -->
   <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
+    <!-- stilos diseñados -->
+        <link rel="stylesheet"
+        href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{{ asset('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css') }}">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet"
+        href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+
+	
+
+
+
+
+
+    <link rel="stylesheet"
+        href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{{ asset('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css') }}">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet"
+        href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+    <!-- stilos diseñados -->
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 <body>
@@ -65,19 +128,39 @@
 					<div class="col-xs-12 col-sm-4">
 						<span class="full-reset titles">Enlacesa importantes</span>
 						<ul class="list-unstyled full-reset">
-							<li><a href="#!" class="open-link-newTab"><i class="fa fa-folder-open"></i>&nbsp; Ofertas Postuladas</a></li>
-							<li><a href="/empresa_lista_oferta"><i class="fa fa-list-alt"></i>&nbsp; Mis fertas laborales</a></li>
-							<li><a href="/empresa_publicar_oferta"><i class="fa fa-newspaper-o"></i>&nbsp; Publicar nueva oferta laboral</a></li>
-							<li><a href="/empresa_dato"><i class="fa fa-file"></i>&nbsp; Datos de la Empresa</a></li>
-							<li><a href="#!" class="open-link-newTab"><i class="fa fa-users"></i>&nbsp; Gestionar Usuarios</a></li>
+							<li><a href="{{route('postular.index')}}"><i class="fa fa-folder-open"></i>&nbsp; Ofertas Postuladas</a></li>
+							<li><a href="{{route('ofertas.index')}}"><i class="fa fa-list-alt"></i>&nbsp; Mis Ofertas laborales</a></li>
+							<li><a href="{{route('ofertas.create')}}"><i class="fa fa-newspaper-o"></i>&nbsp; Publicar nueva oferta laboral</a></li>
+							<li><a href="{{route('empresa.edit',':'.Auth::user()->id)}}"><i class="fa fa-file"></i>&nbsp; Editar datos de la Empresa</a></li>
+							{{-- <li><a href="#!" class="open-link-newTab"><i class="fa fa-users"></i>&nbsp; Gestionar Usuarios</a></li> --}}
 						</ul>
 					</div>
 					<div class="col-xs-12 col-sm-4">
 						<span class="full-reset titles">Sesión</span>
 						<ul class="list-unstyled full-reset">
-							<li><a href="/empresa_login"><i class="fa fa-file"></i>&nbsp; Datos de Usuario</a></li>
-							<li><a href="/empresa_usuario"><i class="fa fa-edit"></i>&nbsp;Modificar datos de Usuario</a></li>
-							<li><a href="/empresa_destroy"><i class="fa fa-user-times"></i>&nbsp; Dar de baja mi cuenta</a></li>
+							<li>                    <form method="POST" action="{{ route('logout') }}">
+								@csrf
+								<i class="fa fa-users"></i>&nbsp;
+								<x-jet-responsive-nav-link href="{{ route('logout') }}"
+												onclick="event.preventDefault();
+															this.closest('form').submit();">
+									{{ __('Desconectar') }} 
+								</x-jet-responsive-nav-link>
+							</form>
+		
+						</li>
+							{{-- <li><a href="/empresa_login"><i class="fa fa-file"></i>&nbsp; Datos de Usuario</a></li>
+							<li><a href="/empresa_usuario"><i class="fa fa-edit"></i>&nbsp;Modificar datos de Usuario</a></li> --}}
+							<li>
+                                <form action="{{ route('admin.destroy', Auth::user()->id) }}" class="formulario"
+                                    method="post">
+                                    @csrf @method('DELETE')
+                                    <input type="hidden" name="estado" value="0">
+                                    <button class="btn-delete" onclick="confirmarbaja();"><i
+                                            class="fa fa-user-times"></i>&nbsp; Dar de baja mi cuenta
+                                    </button>
+                                </form>
+                            </li>	
 						</ul>
 					</div>
 						</div>
@@ -153,5 +236,42 @@
 			</div>
 		</div>
 	</footer>
+<script src="{{ asset('https://cdn.jsdelivr.net/npm/sweetalert2@10') }}"></script>
+ {{-- @if (session('eliminar') == 'ok')
+        <script>
+            Swal.fire(
+                '¡Eliminado!',
+                'El registro se ha eliminado.',
+                'success'
+            )
+
+        </script>
+    @endif --}}
+    <script>
+        function confirmarbaja() {
+            $('.formulario').submit(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Está seguro(a)?',
+                    text: "El registro se eliminará",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#00796b',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '¡Sí, Bórralo!',
+                    cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        this.submit();
+                    }
+
+                })
+
+            })
+        }
+
+    </script>
+
 </body>
 </html>

@@ -1,4 +1,5 @@
-@extends('admin.layout')
+@extends(Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : (Auth::user()->tipo_usuario_id == '2' ?
+'estudiante.layout' : (Auth::user()->tipo_usuario_id == '3' ? 'empresa.layout' : 'layout')))
 @section('title', 'Datos Empresa')
 
 @section('contenido')
@@ -67,7 +68,7 @@
                 <th scope="col">celular</th>
                 <th scope="col">telefono</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Acciones</th>
+                {{-- <th scope="col">Acciones</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -82,10 +83,10 @@
                     } elseif ($user->estado == '0') {
                     echo '<td class="badge badge-danger">Inactivo</td>';
                     } ?>
-                    <td>
+                    {{-- <td>
                         <a href="#" class="fa fa-poll-h fa-2x" title="Editar"></a>
                         <a href="#" class="fa fa-file-excel fa-2x" title="Eliminar"></a>
-                    </td>
+                    </td> --}}
                 </tr>
             @endforeach
         </tbody>

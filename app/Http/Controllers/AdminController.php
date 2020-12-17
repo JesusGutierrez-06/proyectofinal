@@ -49,7 +49,8 @@ class AdminController extends Controller
         // return $request->all();
         
         $admin = new Admin();
-        $admin->email =$request->email;
+        
+        $admin->email = ucwords(strtolower($request->email));
         $admin->password =Hash::make($request->password);
         $admin->tipo_usuario_id =$request->tipo_usuario_id;
         $admin->estado=1;
@@ -89,7 +90,7 @@ class AdminController extends Controller
     public function update(Request $request, Admin $admin){
 
         $admin = new Admin();
-        $admin->email =$request->email;
+        $admin->email = ucwords(strtolower($request->email));
         $admin->password =Hash::make($request->password);
         $admin->tipo_usuario_id =$request->tipo_usuario_id;
         $admin->estado=1;
@@ -107,13 +108,9 @@ class AdminController extends Controller
         $data   = DB::table('users')
         ->join('tipo_usuario','users.tipo_usuario_id','=','tipo_usuario.id')
         ->select('users.id','users.estado','users.created_at','users.email','tipo_usuario.nombre as tipo_usuario')
-        ->orderBy('users.id','asc')
+        ->orderBy('estado','asc')
         ->get();
         $pdf = Facade::loadView('reportes.admin', compact('data'));
-        // dd($data);
         return $pdf->stream('filename.pdf');
-        // view()->share('data',$data);
-        // $pdf = PDF::loadView('reportes.admin', $data);
-        // return $pdf->download('imprimir.pdf');
     }
 }

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends(Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : 'layout'))
 @section('contenido')
     
    

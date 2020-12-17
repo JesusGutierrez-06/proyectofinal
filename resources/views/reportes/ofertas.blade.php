@@ -112,37 +112,43 @@
     </div>
     <br>
     <center>
-        <h1>Lista de Usuarios Registrados</h1>
+        <h1>Lista de Ofertas Laborales Registradas</h1>
     </center>
-
     <table class="bordered">
-        <thead >
+    <thead>
+        <tr>
+            <th >#</th>
+            <th >Titulo de Oferta</th>
+            <th >Publicado</th>
+            <th >Vencimiento</th>
+            <th >Empresa</th>
+            <th >Departamento</th>
+            <th >Carrera</th>
+            <th >Celular / Telefono</th>
+            <th >Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $contador =1; ?>
+        @foreach ($data as $user)
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Email</th>
-                <th scope="col">Tipo Usuario</th>
-                <th scope="col">Fecha de creación</th>
-                <th scope="col">Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $contador =1; ?>
-            @foreach ($data as $user)
-                <tr>
-                    <td >{{ $contador }} <?php $contador=$contador+1; ?></td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->tipo_usuario }}</td>
-                    <td>{{ $user->created_at }}</td>
-                    <?php if ($user->estado == '1') {
-                    echo '<td >Activo</td>';
-                    } elseif ($user->estado == '0') {
-                    echo '<td class="inactivo">Inactivo</td>';
-                    
+                <td >{{ $contador }} <?php $contador=$contador+1; ?></td>
+                <td>{{ $user->titulo }}</td>
+                <td>{{ $user->publicado }}</td>
+                <td>{{ $user->vencimiento }}</td>
+                <td>{{ $user->empresa }}</td>
+                <td>{{ $user->departamento }}</td>
+                <td>{{ $user->carrera }}</td>
+                <td>{{ $user->celular }} / {{ $user->telefono }}</td>
+                <?php if ($user->estado == '1') {
+                echo '<td>Vigente</td>';
+                } elseif ($user->estado == '0') {
+                echo '<td class="inactivo">Inactivo</td>';
                 } ?>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+
 </body>
 </html>

@@ -8,7 +8,7 @@
     <ul class="navbar-nav ml-auto float-right">
         <li class="nav-item">
             <a class="nav-link" data-widget="navbar-search" href="{{ route('admin.create') }}" role="button">
-                <i class="fas fa-user-plus">Nuevo Usuario</i>
+                <i class="fas fa-user-plus icon">Nuevo Usuario</i>
             </a>
             <div class="navbar-search-block">
                 <form class="form-inline">
@@ -50,20 +50,21 @@
                     } ?>
                     <td>{{ $user->created_at }}</td>
                     <td>
-
                         <form action="{{ route('admin.destroy', $user->id) }}" class="formulario" method="post">
                             @csrf @method('DELETE')
-                            <a href="{{ route('admin.show', $user->id) }}"><i alt="Ver más" style="color: black;"
-                                    class="fa fa-eye"> </i></a>
-                            <a href="{{ route('admin.edit', $user->id) }}"><i style="color: black;"
-                                    class="fa fa-edit"></i></a>
-                            @if ($user->estado == '0')
-                                <input type="hidden" name="estado" value="1">
-                            @else
-                                <input type="hidden" name="estado" value="0">
-                            @endif
-                            <button style="padding: 0; border: none; background: none;" onclick="confirmar();"><i
-                                    class="fas fa-trash-alt"></i> </button>
+                            <a href="{{ route('admin.show', $user->id) }}"><i title="Ver más" 
+                                    class="fa fa-eye icon"> </i></a>
+                            <a href="{{ route('admin.edit', $user->id) }}"><i title="Editar"
+                                    class="fa fa-edit icon" ></i></a>
+                                    @if ($user->estado == '0')
+                                    <input type="hidden" name="estado" value="1">
+                                    <button class="btn-delete" onclick="confirmar();"><i title="Restaurar"
+                                            class="fas fa-bullseye"></i> </button>
+                                @else
+                                    <input type="hidden" name="estado" value="0">
+                                    <button class="btn-delete" onclick="confirmar();"><i title="Eliminar"
+                                            class="fas fa-trash-alt"></i> </button>
+                                @endif
                         </form>
                     </td>
                 </tr>

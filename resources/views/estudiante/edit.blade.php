@@ -1,4 +1,5 @@
-@extends('admin.layout')
+@extends(Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : (Auth::user()->tipo_usuario_id == '2' ?
+'estudiante.layout' : 'layout'))
 @section('title', 'Registro Candidato')
 
 @section('contenido')
@@ -8,7 +9,7 @@
         <img class="card-img-top" style="width: 8rem;"
         src="{{ Storage::url($estudiante->foto)}}" alt="Card image cap">
              </center>
-    <form action="{{ route('estudiante.update', $estudiante) }}" method="post">
+    <form action="{{ route('estudiante.update', $estudiante) }}" enctype="multipart/form-data" method="post">
         @csrf
         @method('put')
         <div class="form-row">

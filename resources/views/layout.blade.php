@@ -58,9 +58,8 @@
 					<div class="col-xs-12 col-sm-4">
 						<span class="full-reset titles">Sesión</span>
 						<ul class="list-unstyled full-reset">
-							<li><a href="/login"><i class="fa fa-users"></i>&nbsp; Iniciar Sesión</a></li>
-							<li><a href="/registro"><i class="fa fa-plus-square"></i>&nbsp;Crear Usuario Empresa</a></li>
-							<li><a href="/registroes"><i class="fa fa-user-plus"></i>&nbsp; Crear Usuario Estudiante</a></li>
+							<li><a href="{{ route('login') }}"><i class="fa fa-users"></i>&nbsp; Iniciar Sesión</a></li>
+							<li><a href="{{ route('register') }}"><i class="fa fa-plus-square"></i>&nbsp;Crear Usuario</a></li>
 						</ul>
 					</div>
 						</div>
@@ -71,8 +70,10 @@
 		<a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m"><i class="fa fa-ellipsis-v"></i></a>
 	</header>
 	<!--======================================== Logo & Lema ========================================-->
+	
 	<div class="container">
 	@yield('contenido')
+
 	</div>
 	<!--======================================== Enlaces importantes ========================================-->
 	<section class="text-center important-links-index">

@@ -63,23 +63,50 @@ class EstudianteController extends Controller
         $estudiante->provincia_id = $request->provincia_id;
         $estudiante->users_id = $request->users_id;
         $estudiante->matricula = $request->matricula;
-        $estudiante->nombre = $request->nombre;
-        $estudiante->apellidop = $request->apellidop;
-        $estudiante->apellidom = $request->apellidom;
+        $estudiante->nombre = ucwords(strtolower($request->nombre));
+        $estudiante->apellidop = ucwords(strtolower($request->apellidop));
+        $estudiante->apellidom = ucwords(strtolower($request->apellidom));
+        $estudiante->direccion = ucwords(strtolower($request->direccion));
         $estudiante->fechanac = $request->fechanac;
         $estudiante->telefono = $request->telefono;
         $estudiante->celular = $request->celular;
         $estudiante->dni = $request->dni;
         $estudiante->foto= $request->image->store('public');
-        $estudiante->direccion = $request->direccion;
         $estudiante->estado=1;
 // dd($estudiante);
         $estudiante->save();
         return redirect()->route('estudiante.show',$estudiante );
     }
-    public function show(Estudiante $estudiante){
+    public function show( $estudiante){
 
         // return $estudiante;
+        // dd($estudiante);
+
+        $estudiante= explode(':',$estudiante);
+        
+        if (count($estudiante)>0) {
+            $estudiante = Estudiante::Where('users_id','=',$estudiante[1])->first();
+        
+        }else{
+
+            $estudiante = Estudiante::Where('id','=',$estudiante[0])->first();
+
+        }
+        
+        $data['estudios']= DB::table('estudios')
+        ->join('carrera','carrera.id','=','estudios.carrera_id')
+        ->select('estudios.*','carrera.nombre as carrera')
+        ->where('estudios.estudiante_id','=',$estudiante->id)
+        ->orderBy('estudios.id','asc')
+        ->get();    
+        $data['capacitacion']= DB::table('capacitacion')
+        ->join('tipo_capa','tipo_capa.id','=','capacitacion.tipo_capa_id')
+        ->join('area_capa','area_capa.id','=','capacitacion.area_capa_id')
+        ->select('capacitacion.*','tipo_capa.nombre as tipo_capa',
+        'area_capa.nombre as area_capa')
+        ->where('capacitacion.estudiante_id','=',$estudiante->id)
+        ->orderBy('capacitacion.id','asc')
+        ->get();
         $data['provincia'] = Provincia::find($estudiante->provincia_id);
         $data['tipo_sangre'] = TipoSangre::find($estudiante->tipo_sangre_id);
         $data['genero'] = Genero::find($estudiante->genero_id);
@@ -88,11 +115,20 @@ class EstudianteController extends Controller
         $data['users'] = Admin::find($estudiante->users_id);
         $data['estado_civil'] = EstadoCivil::find($estudiante->estado_civil_id);
         $data['estudiante']= $estudiante;
-        // return $data;        
+        // return $data;
         return view('estudiante.show', compact('data'));
     }
 
-    public function edit(Estudiante $estudiante){
+    public function edit($estudiante){
+        
+        $estudiante= explode(':',$estudiante);
+        
+        if (count($estudiante)>1) {
+            $estudiante = Estudiante::Where('users_id','=',$estudiante[1])->first();
+        }else{
+            $estudiante = Estudiante::Where('id','=',$estudiante[0])->first();
+        }
+
         $departamento = Departamento::All();
         $provincia = Provincia::All();
         $estado_civil = EstadoCivil::All();
@@ -101,6 +137,7 @@ class EstudianteController extends Controller
         return view('estudiante.edit', compact('estudiante','departamento','provincia','estado_civil','tipo_sangre','genero'));
     }
     public function update(Request $request, Estudiante $estudiante){
+
         $request->validate([
             'image'=> 'image'
         ]);
@@ -110,21 +147,31 @@ class EstudianteController extends Controller
         $estudiante->provincia_id = $request->provincia_id;
         $estudiante->users_id = $request->users_id;
         $estudiante->matricula = $request->matricula;
-        $estudiante->nombre = $request->nombre;
-        $estudiante->apellidop = $request->apellidop;
-        $estudiante->apellidom = $request->apellidom;
+        $estudiante->nombre = ucwords(strtolower($request->nombre));
+        $estudiante->apellidop = ucwords(strtolower($request->apellidop));
+        $estudiante->apellidom = ucwords(strtolower($request->apellidom));
+        $estudiante->direccion = ucwords(strtolower($request->direccion));
         $estudiante->fechanac = $request->fechanac;
         $estudiante->telefono = $request->telefono;
         $estudiante->celular = $request->celular;
         $estudiante->dni = $request->dni;
         $estudiante->foto= $request->image->store('public');
-        $estudiante->direccion = $request->direccion;
+        // dd($estudiante);
         $estudiante->estado=1;
         $estudiante->save();
-        return redirect()->route('estudiante.index');
+        return redirect()->route('postular.index');
     }
-    public function destroy( Estudiante $estudiante){
+    public function destroy($estudiante){
+        $estudiante= explode(':',$estudiante);
+        
+        if (count($estudiante)>0) {
+            $estudiante = Estudiante::Where('users_id','=',$estudiante[1])->first();
+        
+        }else{
 
+            $estudiante = Estudiante::Where('id','=',$estudiante[0])->first();
+
+        }
         $estudiante->estado =0;
         // dd($empresa);
         $estudiante->save();
@@ -147,5 +194,51 @@ class EstudianteController extends Controller
         // view()->share('data',$data);
         // $pdf = PDF::loadView('reportes.admin', $data);
         // return $pdf->download('imprimir.pdf');
+    }
+    public function curriculum($estudiante){
+        $estudiante= explode(':',$estudiante);
+        
+        if (count($estudiante)>1) {
+            $estudiante = Estudiante::Where('users_id','=',$estudiante[1])->first();
+        }else{
+            $estudiante = Estudiante::Where('id','=',$estudiante[0])->first();
+        }
+        $data['estudios']= DB::table('estudios')
+        ->join('carrera','carrera.id','=','estudios.carrera_id')
+        ->select('estudios.*','carrera.nombre as carrera')
+        ->where('estudios.estudiante_id','=',$estudiante->id)
+        ->orderBy('estudios.id','asc')
+        ->get();    
+        $data['capacitacion']= DB::table('capacitacion')
+        ->join('tipo_capa','tipo_capa.id','=','capacitacion.tipo_capa_id')
+        ->join('area_capa','area_capa.id','=','capacitacion.area_capa_id')
+        ->select('capacitacion.*','tipo_capa.nombre as tipo_capa',
+        'area_capa.nombre as area_capa')
+        ->where('capacitacion.estudiante_id','=',$estudiante->id)
+        ->orderBy('capacitacion.id','asc')
+        ->get();
+        $data['estudios_idioma']= DB::table('estudios_idioma')
+        ->join('idioma','idioma.id','=','estudios_idioma.idioma_id')
+        ->select('estudios_idioma.*','idioma.nombre as idioma')
+        ->where('estudios_idioma.estudiante_id','=',$estudiante->id)
+        ->orderBy('estudios_idioma.id','asc')
+        ->get();
+        $data['exp_laboral']= DB::table('exp_laboral')
+        ->join('area_laboral','area_laboral.id','=','exp_laboral.area_laboral_id')
+        ->select('exp_laboral.*','area_laboral.nombre as area_laboral')
+        ->where('exp_laboral.estudiante_id','=',$estudiante->id)
+        ->orderBy('exp_laboral.id','asc')
+        ->get();
+        $data['provincia'] = Provincia::find($estudiante->provincia_id);
+        $data['tipo_sangre'] = TipoSangre::find($estudiante->tipo_sangre_id);
+        $data['genero'] = Genero::find($estudiante->genero_id);
+        $departamento = $data['provincia'];
+        $data['departamento'] = Departamento::find($departamento->dpto_id);
+        $data['users'] = Admin::find($estudiante->users_id);
+        $data['estado_civil'] = EstadoCivil::find($estudiante->estado_civil_id);
+        $data['estudiante']= $estudiante;
+        $pdf = Facade::loadView('reportes.curriculum', compact('data'));
+        // dd($data);
+        return $pdf->stream('filename.pdf');
     }
 }

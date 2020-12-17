@@ -1,6 +1,6 @@
-@extends('admin.layout')
+@extends(Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : (Auth::user()->tipo_usuario_id == '2' ?
+'estudiante.layout' : 'layout'))
 @section('title', 'Registro Estudiante')
-
 @section('contenido')
     <center>
         <h1>Registrar Estudiantes</h1>

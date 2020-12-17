@@ -7,6 +7,12 @@ use App\Http\Controllers\OfertaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\PostularOfertaController;
+use App\Http\Controllers\EstudiosController;
+use App\Http\Controllers\CapacitacionController;
+use App\Http\Controllers\ExpLaboralController;
+use App\Http\Controllers\EstudiosIdiomaController;
+use App\Http\Controllers\EnsecController;
+
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -21,7 +27,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/admin', function () {
@@ -51,6 +57,7 @@ Route::get('/postular/{postular}', [PostularOfertaController::class,'show'])->na
 Route::get('/postular/{postular}/edit', [PostularOfertaController::class,'edit'])->name('postular.edit');
 Route::put('/postular/{postular}', [PostularOfertaController::class,'update'])->name('postular.update');
 Route::delete('postular/{postular}', [PostularOfertaController::class,'destroy'])->name('postular.destroy');
+Route::get('/postular/contrato', [PostularOfertaController::class,'contrato'])->name('postular.contrato');
 
 Route::get('admin', [AdminController::class,'index'])->name('admin.index');
 Route::get('admin/create', [AdminController::class,'create'])->name('admin.create');
@@ -62,7 +69,9 @@ Route::delete('admin/{admin}', [AdminController::class,'destroy'])->name('admin.
 
 Route::get('reportes/admin', [AdminController::class,'imprimir'])->name('reportes.admin');
 Route::get('reportes/estudiante', [EstudianteController::class,'imprimir'])->name('reportes.estudiante');
+Route::get('reportes/{reportes}/curriculum', [EstudianteController::class,'curriculum'])->name('reportes.curriculum');
 Route::get('reportes/empresa', [EmpresaController::class,'imprimir'])->name('reportes.empresa');
+Route::get('reportes/ofertas', [OfertaController::class,'imprimir'])->name('reportes.ofertas');
 
 Route::get('contacto', [ContactoController::class,'index'])->name('contacto.index');
 Route::get('contacto/{contacto}/create', [ContactoController::class,'create'])->name('contacto.create');
@@ -90,3 +99,21 @@ Route::get('combos/{combos}', [EstudianteController::class,'show'])->name('combo
 Route::get('combos/{combos}/edit', [EstudianteController::class,'edit'])->name('combos.edit');
 Route::put('combos/{combos}', [EstudianteController::class,'update'])->name('combos.update');
 
+
+Route::get('/estudios', [EstudiosController::class,'index'])->name('estudios.index');
+Route::get('/estudios/create', [EstudiosController::class,'create'])->name('estudios.create');
+Route::post('/estudios', [EstudiosController::class,'store'])->name('estudios.store');
+Route::get('/estudios/{estudios}', [EstudiosController::class,'show'])->name('estudios.show');
+Route::get('/estudios/{estudios}/edit', [EstudiosController::class,'edit'])->name('estudios.edit');
+Route::put('/estudios/{estudios}', [EstudiosController::class,'update'])->name('estudios.update');
+Route::delete('estudios/{estudios}', [EstudiosController::class,'destroy'])->name('estudios.destroy');
+
+
+Route::get('/admision', [EnsecController::class,'admision'])->name('ensec.admision');
+Route::get('/about', [EnsecController::class,'about'])->name('ensec.about');
+
+Route::post('/capacitacion', [CapacitacionController::class,'store'])->name('capacitacion.store');
+Route::get('/exp_laboral', [ExpLaboralController::class,'index'])->name('exp_laboral.index');
+Route::post('/exp_laboral', [ExpLaboralController::class,'store'])->name('exp_laboral.store');
+
+Route::post('/estudiosidioma', [EstudiosIdiomaController::class,'store'])->name('estudiosidioma.store');

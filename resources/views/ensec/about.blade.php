@@ -1,8 +1,9 @@
-@extends('layout')
+@extends( empty(Auth::user()) ? 'layout': (Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : (Auth::user()->tipo_usuario_id == '2' ?
+'estudiante.layout' : (Auth::user()->tipo_usuario_id == '3' ? 'empresa.layout' : 'layout'))))
 @section('title','Acerca de')
     
 @section('contenido')
-
+<br>
 <section class="full-reset" style="background-color: rgb(242, 242, 242); padding: 40px 0;">
     <div class="container">
         <h2 class="text-center titles">Instalaciones de la institución</h2>

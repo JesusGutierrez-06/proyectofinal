@@ -12,3 +12,16 @@ body{
   background-color: #00796b;
   border-color: #00796b
 }
+.titulo th{
+  text-align: center;
+}
+
+.btn-delete{
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.icon{
+  color: black;
+}

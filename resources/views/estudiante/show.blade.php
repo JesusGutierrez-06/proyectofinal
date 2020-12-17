@@ -1,4 +1,5 @@
-@extends('admin.layout')
+@extends(Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : (Auth::user()->tipo_usuario_id == '2' ?
+'estudiante.layout' : 'layout'))
 @section('title', 'Registro Candidato')
 
 @section('contenido')
@@ -66,144 +67,78 @@
         </div>
     </div>
     <center>
-      <h1>Datos academicos</h1>
-  </center>
-  <h3>Lista de Estudios técnicos </h3>
+        <h1>Datos académicos</h1>
+    </center>
+    @if (!empty($data['estudios'][0]))
 
-        <table style="text-align: center" class="table table-hover table-responsive-xl">
-            <thead class="table-success">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Semestre</th>
-                <th scope="col">Institución</th>
-                <th scope="col">Carrera</th>
-                <th scope="col">Fecha de inicio</th>
-                <th scope="col">Fecha de finalización</th>
-                <th scope="col">Acciones</th>
-              </tr>
+        <center>
+            <h3>
+                Listado de mis estudios
+            </h3>
+        </center>
+        <table class="table titulo table-responsive-xl">
+            <thead class="table-color">
+                <tr>
+                    <th>N° de Registro</th>
+                    <th>Semestre</th>
+                    <th>Institución</th>
+                    <th>Carrera</th>
+                    <th>Fecha de Inscripción</th>
+                    <th>Fecha de Finalización</th>
+                </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>5to Semestre</td>
-                <td>Tecnologico Santa Cruz.</td>
-                <td>Contaduria</td>
-                <td>2017-02-1</td>
-                <td>Cursando</td>
-                <td><center><img src="{{asset('/static/assets/img/detalles.png')}}"></center></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>4to Semestre</td>
-                <td>E.N.S.E.C.</td>
-                <td>Informatica</td>
-                <td>2018-02-1</td>
-                <td>Cursando</td>
-                <td><center><img src="{{asset('/static/assets/img/detalles.png')}}"></center></td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>5to Semestre</td>
-                <td>E.N.S.E.C.</td>
-                <td>Administración</td>
-                <td>2017-06-1</td>
-                <td>Cursando</td>
-                <td><center><img src="{{asset('/static/assets/img/detalles.png')}}"></center></td>
-              </tr>
+                @foreach ($data['estudios'] as $user)
+                    <tr>
+                        <th>{{ $user->id }}</th>
+                        <td>{{ $user->semestre }}</td>
+                        <td>{{ $user->institucion }}</td>
+                        <td>{{ $user->carrera }}</td>
+                        <td>{{ $user->fechainicio }}</td>
+                        <td>{{ $user->fechafin }}</td>
+                    </tr>
+                @endforeach
             </tbody>
-          </table>
-<br>
+        </table>
 
-<h3>Lista de Capacitaciones ingresado </h3>
+    @else
+        <h1>No existen datos de estudios registrados</h1>
+    @endif
+    @if (!empty($data['capacitacion'][0]))
 
-<table style="text-align: center" class="table table-hover table-responsive-xl">
-    <thead class="table-success">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Titulo</th>
-        <th scope="col">Institución</th>
-        <th scope="col">Tipo de Capacitacion</th>
-        <th scope="col">Fecha de inicio</th>
-        <th scope="col">Fecha de finalización</th>
-        <th scope="col">Area de estudio</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Excel Avanzado</td>
-        <td>Tecnologico Santa Cruz.</td>
-        <td>Tecnología</td>
-        <td>2017-02-01</td>
-        <td>2017-06-01</td>
-        <td>Ofimática</td>
-        <td><center><img src="{{asset('/static/assets/img/detalles.png')}}"></center></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Programa espacial Boliviano</td>
-        <td>Tecnologico Santa Cruz.</td>
-        <td>Tecnología</td>
-        <td>2017-02-01</td>
-        <td>2017-03-01</td>
-        <td>Ofimática</td>
-        <td><center><img src="{{asset('/static/assets/img/detalles.png')}}"></center></td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Power Point Básico</td>
-        <td>Tecnologico Santa Cruz.</td>
-        <td>Tecnología</td>
-        <td>2017-06-01</td>
-        <td>2017-12-01</td>
-        <td>Ofimática</td>
-        <td><center><img src="{{asset('/static/assets/img/detalles.png')}}"></center></td>
-      </tr>
-    </tbody>
-  </table>
-<br>
-<h3>Lista de idiomas</h3>
-<div class="row">
-  <!--======================================== Articulo 1 ========================================-->
-  <article class="col-xs-12 col-sm-6 col-md-6">
-    <table style="text-align: center" class="table table-hover table-responsive-xl">
-        <thead class="table-success">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Idioma</th>
-            <th scope="col">Hablar</th>
-            <th scope="col">Escribir</th>
-            <th scope="col">Leer</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Coreano</td>
-            <td>Avanzado</td>
-            <td>Básico</td>
-            <td>Intermedio</td>
-            <td><center><img src="{{asset('/static/assets/img/detalles.png')}}"></center></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Frances</td>
-            <td>Avanzado</td>
-            <td>Básico</td>
-            <td>Intermedio</td>
-            <td><center><img src="{{asset('/static/assets/img/detalles.png')}}"></center></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Ingles</td>
-            <td>Avanzado</td>
-            <td>Básico</td>
-            <td>Intermedio</td>
-            <td><center><img src="{{asset('/static/assets/img/detalles.png')}}"></center></td>
-          </tr>
-        </tbody>
-      </table>
-<br>
+        <center>
+            <h3>
+                Listado de mis cursos / certificados de estudios
+            </h3>
+        </center>
+        <table class="table titulo table-responsive-xl">
+            <thead class="table-color">
+                <tr>
+                    <th>N° de Registro</th>
+                    <th>Titulo</th>
+                    <th>Institución</th>
+                    <th>Area de Capacitación</th>
+                    <th>Tipo de Capacitación</th>
+                    <th>Fecha de Inscripción</th>
+                    <th>Fecha de Finalización</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($data['capacitacion'] as $user)
+                    <tr>
+                        <th>{{ $user->id }}</th>
+                        <td>{{ $user->nombre }}</td>
+                        <td>{{ $user->institucion }}</td>
+                        <td>{{ $user->area_capa }}</td>
+                        <td>{{ $user->tipo_capa }}</td>
+                        <td>{{ $user->fechainicio }}</td>
+                        <td>{{ $user->fechafin }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+    @else
+        <h1>No existen datos de capacitaciones registradas</h1>
+    @endif
 @endsection

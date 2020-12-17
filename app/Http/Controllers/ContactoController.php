@@ -39,7 +39,7 @@ class ContactoController extends Controller
         $contacto = new Contacto();
         $contacto->empresa_id =$request->empresa_id;
         $contacto->users_id =$request->users_id;
-        $contacto->nombre =$request->nombre;
+        $contacto->nombre = ucwords(strtolower($request->nombre));
         $contacto->celular =$request->celular;
         $contacto->telefono =$request->telefono;
         $contacto->estado=1;
@@ -53,7 +53,7 @@ class ContactoController extends Controller
     }
     public function update(Request $request, Contacto $contacto){
 
-        $contacto->nombre =$request->nombre;
+        $contacto->nombre = ucwords(strtolower($request->nombre));
         $contacto->telefono =$request->telefono;
         $contacto->celular =$request->celular;
         $contacto->estado=1;
