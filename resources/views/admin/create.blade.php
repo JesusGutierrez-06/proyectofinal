@@ -15,10 +15,20 @@
           </div>
           <input type="text" class="form-control" name="email" placeholder="example@example.com" aria-describedby="inputGroupPrepend" >
         </div>
+            @error('email')
+                <br>
+                <small>* {{$message}}</small>
+                <br>
+            @enderror
       </div>
       <div class="col-md-4 mb-3">
         <label >Password</label>
         <input type="password" class="form-control" name="password"  placeholder="Contraseña" >
+        @error('password')
+        <br>
+        <small>* {{$message}}</small>
+        <br>
+    @enderror
       </div>
           <div class="col-md-2 mb-3">
             <label >Tipo de Usuario</label>
@@ -28,6 +38,11 @@
               <option value="{{ $tipo_usuarios->id}}">{{ $tipo_usuarios->nombre}}</option>
               @endforeach
             </select>
+            @error('tipo_usuario_id')
+            <br>
+            <small>* {{$message}}</small>
+            <br>
+        @enderror
           </div>
     </div>
     <div class="form-row">

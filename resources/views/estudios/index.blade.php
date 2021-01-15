@@ -94,12 +94,22 @@
                             <label>Institución / Colegio</label>
                             <input type="text" class="form-control" name="institucion"
                                 placeholder="Nombre de la institución">
+                            @error('institucion')
+                                <br>
+                                <small>* {{ $message }}</small>
+                                <br>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label>Año / Semestre</label>
                             <input type="text" class="form-control" name="semestre" placeholder="Cursando o finalizado">
+                            @error('semestre')
+                                <br>
+                                <small>* {{ $message }}</small>
+                                <br>
+                            @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Carrera</label>
@@ -109,18 +119,32 @@
                                     <option value="{{ $carrera->id }}">{{ $carrera->nombre }}</option>
                                 @endforeach
                             </select>
+                            @error('carrera_id')
+                                <br>
+                                <small>* {{ $message }}</small>
+                                <br>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label>Fecha de Inscripción</label>
-                            <input type="text" class="form-control" name="fechainicio" placeholder="YYYY-mm-dd">
+                            <input type="date" max="{{ $data['fecha'] }}" class="form-control" name="fechainicio" placeholder="YYYY-mm-dd">
+                            @error('fechainicio')
+                                <br>
+                                <small>* {{ $message }}</small>
+                                <br>
+                            @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Fecha de Finalización</label>
-                            <input type="text" class="form-control" name="fechafin" placeholder="YYYY-mm-dd">
+                            <input type="date" class="form-control" name="fechafin" placeholder="YYYY-mm-dd">
+                            @error('fechafin')
+                                <br>
+                                <small>* {{ $message }}</small>
+                                <br>
+                            @enderror
                         </div>
-
                     </div>
                     <div class="form-row">
                         <div class="col-md-5 mb-3">
@@ -129,9 +153,6 @@
                                 <label class="form-check-label">
                                     Estoy de acuerdo con los terminos y condiciones
                                 </label>
-                                <div class="invalid-feedback">
-                                    You must agree before submitting.
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-5 mb-3">
@@ -159,6 +180,11 @@
                             <label>Institución</label>
                             <input type="text" class="form-control" name="institucion"
                                 placeholder="Nombre de la institución">
+                            @error('institucion')
+                                <br>
+                                <small>* {{ $message }}</small>
+                                <br>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-row">
@@ -170,6 +196,11 @@
                                     <option value="{{ $area_capa->id }}">{{ $area_capa->nombre }}</option>
                                 @endforeach
                             </select>
+                            @error('area_capa_id')
+                                <br>
+                                <small>* {{ $message }}</small>
+                                <br>
+                            @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Tipo de Capacitacion</label>
@@ -179,16 +210,31 @@
                                     <option value="{{ $tipo_capa->id }}">{{ $tipo_capa->nombre }}</option>
                                 @endforeach
                             </select>
+                            @error('tipo_capa_id')
+                                <br>
+                                <small>* {{ $message }}</small>
+                                <br>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label>Fecha de Inscripción</label>
-                            <input type="text" class="form-control" name="fechainicio" placeholder="YYYY-mm-dd">
+                            <input type="date" max="{{ $data['fecha'] }}" class="form-control" name="fechainicio" placeholder="YYYY-mm-dd">
+                            @error('fechainicio')
+                                <br>
+                                <small>* {{ $message }}</small>
+                                <br>
+                            @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>Fecha de Finalización</label>
-                            <input type="text" class="form-control" name="fechafin" placeholder="YYYY-mm-dd">
+                            <input type="date" class="form-control" name="fechafin" placeholder="YYYY-mm-dd">
+                            @error('fechafin')
+                                <br>
+                                <small>* {{ $message }}</small>
+                                <br>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-row">
@@ -214,4 +260,4 @@
 
         </div>
     </div>
-    @endsection
+@endsection

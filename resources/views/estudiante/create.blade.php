@@ -13,36 +13,69 @@
             <div class="col-md-4 mb-3">
                 <label>Nombre</label>
                 <input type="text" class="form-control" name="nombre" value="" placeholder="Nombre">
+                @error('nombre')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label>Apellido Paterno</label>
                 <input type="text" class="form-control" name="apellidop" placeholder="Apellido Paterno">
+                @error('apellidop')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label>Apellido Materno</label>
                 <input type="text" class="form-control" name="apellidom" placeholder="Apellido Materno">
+                @error('apellidom')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label>Matricula</label>
                 <input type="text" class="form-control" name="matricula" placeholder="Matriula estudiantil">
+                @error('matricula')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-2 mb-3">
                 <label>Celular</label>
                 <input type="text" class="form-control" name="celular" placeholder="Celular">
+                @error('celular')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-2 mb-3">
                 <label>Telefono</label>
                 <input type="text" class="form-control" name="telefono" placeholder="Telefono">
+                @error('telefono')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label>Fotografía</label>
                 <div class="custom-file">
-                    <input type="file" name="image" accept="image/*" class="custom-file-input" id="validatedCustomFile"
-                        required>
-                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                    <input type="file" name="image" accept="image/*" class="custom-file-input">
+                    <label class="custom-file-label">Choose file...</label>
+                    @error('image')
+                        <br>
+                        <small>* {{ $message }}</small>
+                        <br>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -50,10 +83,20 @@
             <div class="col-md-4 mb-3">
                 <label>Documento de Identidad</label>
                 <input type="text" class="form-control" name="dni" placeholder="C.I.">
+                @error('dni')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-2 mb-3">
                 <label>Fecha Nacimiento</label>
                 <input type="text" class="form-control" name="fechanac" placeholder="2000-11-01">
+                @error('fechanac')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-2 mb-3">
                 <label>Genero</label>
@@ -63,6 +106,11 @@
                         <option value="{{ $generos->id }}">{{ $generos->nombre }}</option>
                     @endforeach
                 </select>
+                @error('genero_id')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-2 mb-3">
                 <label>Estado Civil</label>
@@ -72,6 +120,11 @@
                         <option value="{{ $estados_civiles->id }}">{{ $estados_civiles->nombre }}</option>
                     @endforeach
                 </select>
+                @error('estado_civil_id')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-2 mb-3">
                 <label>Grupo sanguineo</label>
@@ -81,6 +134,11 @@
                         <option value="{{ $tipos_sangres->id }}">{{ $tipos_sangres->nombre }}</option>
                     @endforeach
                 </select>
+                @error('tipo_sangre_id')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
         </div>
         <div class="form-row">
@@ -92,6 +150,11 @@
                         <option value="{{ $departamentos->id }}">{{ $departamentos->nombre }}</option>
                     @endforeach
                 </select>
+                @error('departamento_id')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label>Provincia</label>
@@ -101,11 +164,21 @@
                         <option value="{{ $provincias->id }}">{{ $provincias->nombre }}</option>
                     @endforeach
                 </select>
+                @error('provincia_id')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label>Domicilio</label>
                 <input type="text" class="form-control" name="direccion" placeholder="Barrio / Calle">
             </div>
+            @error('direccion')
+                <br>
+                <small>* {{ $message }}</small>
+                <br>
+            @enderror
         </div>
         <div class="form-row">
             <div class="col-md-5 mb-3">
@@ -145,5 +218,6 @@
                 });
             }, false);
         })();
+
     </script>
 @endsection

@@ -9,4 +9,9 @@ class AreaLaboral extends Model
 {
     use HasFactory;
     protected $table='area_laboral';
+    protected $fillable = [
+        'id',
+        'nombre',
+        'estado',
+    ];
 }

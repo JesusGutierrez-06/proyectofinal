@@ -9,12 +9,19 @@ use App\Models\ExpLaboral;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Idioma;
+use Carbon\Carbon;
+
 
 class ExpLaboralController extends Controller
 {
     //
     public function index(Request $request){
         $estudiante= Estudiante::where('users_id','=',Auth::user()->id)->first();
+        if (empty($estudiante)){
+            // dd($tmp);
+            return redirect()->route('estudiante.create', Auth::user()->id);
+            // return view('estudiante.create', compact('tmp'));
+        }
         $buscar= $request->get('buscar');
         $data['exp_laboral']= DB::table('exp_laboral')
         ->join('area_laboral','area_laboral.id','=','exp_laboral.area_laboral_id')
@@ -32,6 +39,8 @@ class ExpLaboralController extends Controller
         ->orderBy('estudios_idioma.id','asc')
         ->paginate(5);    
         
+        $todo = Carbon::now();
+        $data['fecha']= $todo->format('Y-m-d');
         $data['area_laboral']= AreaLaboral::all();
         $data['idioma']= Idioma::All();
         // dd($data);
@@ -43,7 +52,17 @@ class ExpLaboralController extends Controller
     }
     public function store(Request $request){
         // return $request->all();
+                $request->validate([
+                    'estudiante_id' => 'required',
+                    'area_laboral_id' => 'required',
+                    'institucion' => 'required',
+                    'puesto' => 'required',
+                    'fechainicial' => 'required|date',
+                    'fechafin' =>'date',
+                    'descripcion' =>'required'
+                ]);
         $estudiante= Estudiante::where('users_id','=',Auth::user()->id)->first();
+        
         $explaboral = new ExpLaboral();
         $explaboral->estudiante_id = $estudiante->id;
         $explaboral->area_laboral_id = $request->area_laboral_id;

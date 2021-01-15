@@ -31,7 +31,6 @@ class OfertaController extends Controller
     public function index(Request $request)
     {
         $buscar = $request->get('buscar');
-        
         if(Auth::user()->tipo_usuario_id == '2' or Auth::user()->tipo_usuario_id == '1'){
             $data = DB::table('oferta_laboral')
             ->join('carrera', 'carrera.id', '=', 'oferta_laboral.carrera_id')
@@ -57,6 +56,11 @@ class OfertaController extends Controller
 
         }elseif(Auth::user()->tipo_usuario_id == '3'){
             $empresa= Empresa::where('users_id','=',Auth::user()->id)->first();
+            if (empty($empresa)){
+                // dd($tmp);
+                return redirect()->route('empresa.create', Auth::user()->id);
+                // return view('empresa.create', compact('tmp'));
+            }
             $data = DB::table('oferta_laboral')
             ->join('carrera', 'carrera.id', '=', 'oferta_laboral.carrera_id')
             ->join('tipo_sueldo', 'tipo_sueldo.id', '=', 'oferta_laboral.tipo_sueldo_id')
@@ -90,25 +94,50 @@ class OfertaController extends Controller
         $salario = Salario::All();
         $users_id=Auth::user()->id;
         $empresa = Empresa::where('users_id','=',$users_id)->first();
+        if (empty($empresa)){
+            // dd($tmp);
+            return redirect()->route('empresa.create', Auth::user()->id);
+            // return view('empresa.create', compact('tmp'));
+        }
+
         $todos['carrera'] = $carrera;
         $todos['salario'] = $salario;
         $todos['tipo_sueldo'] = $tipo_sueldo;
         $todos['contrato'] = $contrato;
         $todos['empresa'] = $empresa;
         // dd($todos);
+        $todo = Carbon::now();
+        $todos['fecha']= $todo->format('Y-m-d');
+        // dd($todos);
         return view('ofertas.create', compact('todos'));
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'carrera_id' =>'required',
+            'empresa_id' =>'required',
+            'salario_id' =>'required',
+            'contrato_id' => 'required',
+            'tipo_sueldo_id'=>'required',
+            'titulo' =>'required',
+            'descripcion' => 'required',
+            'vencimiento' => 'required',
+            'celular'=> 'numeric|min:7 ',
+            'vencimiento'=> 'date',
+            'vacantes' => 'numeric|gt:0'
+        ]);
+            // $cadena = $request->vencimiento;
+       
+            // dd($cadena);
         $oferta_laboral = new Oferta();
         $oferta_laboral->carrera_id = $request->carrera_id;
         $oferta_laboral->empresa_id = $request->empresa_id;
         $oferta_laboral->salario_id = $request->salario_id;
         $oferta_laboral->tipo_sueldo_id = $request->tipo_sueldo_id;
         $oferta_laboral->contrato_id = $request->contrato_id;
-        $oferta_laboral->titulo = ucwords(strtolower($request->titulo));
-        $oferta_laboral->descripcion = ucfirst(strtolower($request->descripcion));
-        $oferta_laboral->requisito = ucfirst(strtolower($request->requisito));
+        $oferta_laboral->titulo = ucwords(mb_strtolower($request->titulo));
+        $oferta_laboral->descripcion = ucfirst(mb_strtolower($request->descripcion));
+        $oferta_laboral->requisito = ucfirst(mb_strtolower($request->requisito));
         $oferta_laboral->vencimiento = $request->vencimiento;
         $oferta_laboral->telefono = $request->telefono;
         $oferta_laboral->celular = $request->celular;
@@ -195,8 +224,9 @@ class OfertaController extends Controller
             ->orderBy('oferta_laboral.id', 'asc')
             ->get();
             // dd($data);
-         $pdf = Facade::loadView('reportes.ofertas', compact('data'));
-        // dd($data);
+         $pdf = Facade::loadView('reportes.ofertas', compact('data'))
+         ->setPaper('letter');
+        // dd($data),'landscape';
         return $pdf->stream('filename.pdf');
         // view()->share('data',$data);
         // $pdf = PDF::loadView('reportes.admin', $data);

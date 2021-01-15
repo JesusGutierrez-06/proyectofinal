@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Empresa;
 use App\Models\Contacto;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\DB;
 
 class ContactoController extends Controller
@@ -36,6 +38,13 @@ class ContactoController extends Controller
     }
     public function store(Request $request){
         // return $request->all();
+                $request->validate([
+                    'empresa_id' => 'required',
+                    'users_id' => 'required',
+                    'nombre' => 'required',
+                    'celular' => 'required|numeric|min:8',
+                    'telefono' => 'numeric'
+                ]);
         $contacto = new Contacto();
         $contacto->empresa_id =$request->empresa_id;
         $contacto->users_id =$request->users_id;
@@ -45,7 +54,12 @@ class ContactoController extends Controller
         $contacto->estado=1;
         // dd($contacto);
         $contacto->save();
+        if (Auth::user()->tipo_usuario_id = '3'){
+            return redirect()->route('ofertas.index' );
+    
+        }elseif(Auth::user()->tipo_usuario_id = '1'){
         return redirect()->route('empresa.index' );
+    }
     }
     public function edit(Contacto $contacto){
 
@@ -58,13 +72,23 @@ class ContactoController extends Controller
         $contacto->celular =$request->celular;
         $contacto->estado=1;
         $contacto->save();
-        return redirect()->route('empresa.index');
+        if (Auth::user()->tipo_usuario_id = '3'){
+            return redirect()->route('ofertas.index' );
+    
+        }elseif(Auth::user()->tipo_usuario_id = '1'){
+        return redirect()->route('empresa.index' );
+    }
     }
     public function destroy( Contacto $contacto){
 
         $contacto->estado =0;
         // dd($empresa);
         $contacto->save();
-        return redirect()->route('empresa.index');
+        if (Auth::user()->tipo_usuario_id = '3'){
+            return redirect()->route('ofertas.index' );
+    
+        }elseif(Auth::user()->tipo_usuario_id = '1'){
+        return redirect()->route('empresa.index' );
+    }
     }
 }

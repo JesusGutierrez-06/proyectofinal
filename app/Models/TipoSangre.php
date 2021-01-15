@@ -9,4 +9,9 @@ class TipoSangre extends Model
 {
     use HasFactory;
     protected $table='tipo_sangre';
+    protected $fillable = [
+        'id',
+        'nombre',
+        'estado',
+    ];
 }

@@ -50,9 +50,8 @@
             <div class="col-md-4 mb-3">
                 <label>Fotografía</label>
                 <div class="custom-file">
-                    <input type="file" name="image" accept="image/*" class="custom-file-input" id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                    <input type="file" name="image" accept="image/*" class="custom-file-input">
+                    <label class="custom-file-label">Choose file...</label>
                      </div>
                 </div>
         </div>
@@ -143,21 +142,9 @@
               <input type="text" class="form-control" name="direccion" value="{{ $estudiante->direccion }}"
                   placeholder="Barrio / Calle">
           </div>
-
           </div>
-
-
         <div class="form-row">
             <div class="col-md-4 mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
-                    <label class="form-check-label">//
-                        Estoy de acuerdo con los terminos y condiciones
-                    </label>
-                    <div class="invalid-feedback">
-                        You must agree before submitting.
-                    </div>
-                </div>
             </div>
             <div class="col-md-4 mb-3">
                 <button class="btn btn-primary" type="submit">Actualizar Información</button>

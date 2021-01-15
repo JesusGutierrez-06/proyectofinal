@@ -48,6 +48,11 @@ class AdminController extends Controller
     public function store(Request $request){
         // return $request->all();
         
+        $request->validate([
+            'tipo_usuario_id' =>'required',
+            'email' =>'required|email',
+            'password' =>'required|min:8'           
+        ]);
         $admin = new Admin();
         
         $admin->email = ucwords(strtolower($request->email));
@@ -110,7 +115,8 @@ class AdminController extends Controller
         ->select('users.id','users.estado','users.created_at','users.email','tipo_usuario.nombre as tipo_usuario')
         ->orderBy('estado','asc')
         ->get();
-        $pdf = Facade::loadView('reportes.admin', compact('data'));
+        $pdf = Facade::loadView('reportes.admin', compact('data'))
+        ->setPaper('letter');
         return $pdf->stream('filename.pdf');
     }
 }

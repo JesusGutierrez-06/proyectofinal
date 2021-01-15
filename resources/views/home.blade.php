@@ -3,6 +3,16 @@
 @section('title','Home')
     
 @section('contenido')
+
+{{-- @auth
+@if (Auth::user()->tipo_usuario_id == '3')
+<h3><a href="{{ route('empresa.create',Auth::user()->id ) }}" class="text-sm text-gray-700 underline">Registrar Datos de la Empresa</a></h3>
+@elseif(Auth::user()->tipo_usuario_id == '2')
+<h3><a href="{{ route('estudiante.create',Auth::user()->id ) }}" class="text-sm text-gray-700 underline">Registrar Datos Personales</a></h3>
+@endif
+@endauth --}}
+
+
 <br>
 <div id="slider-ins" class="carousel slide" data-ride="carousel">
   <!-- Indicadores -->

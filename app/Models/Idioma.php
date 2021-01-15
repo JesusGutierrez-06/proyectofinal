@@ -9,4 +9,9 @@ class Idioma extends Model
 {
     use HasFactory;
     protected $table='idioma';
+    protected $fillable = [
+        'id',
+        'nombre',
+        'estado',
+    ];
 }

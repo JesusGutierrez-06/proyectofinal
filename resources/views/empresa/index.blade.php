@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title', 'Registro Empresa')
+@section('title', 'Empresa')
 @section('contenido')
 <div class="card-header">
     <center>
@@ -108,7 +108,6 @@
                 'El registro se ha eliminado.',
                 'success'
             )
-
         </script>
     @endif
     <script>
@@ -134,7 +133,5 @@
 
             })
         }
-
-    </script> --}}
-
+    </script> 
 @endsection

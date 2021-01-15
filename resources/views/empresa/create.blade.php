@@ -13,20 +13,23 @@
         <input type="hidden" name="users_id" value="{{ $todos['admin'] }}">
         <div class="form-row">
             <div class="col-md-4 mb-3">
-                <label for="validationCustom01">Razón social</label>
-                <input type="text" name="nombre" class="form-control" id="validationCustom01"
-                    placeholder="Nombre,Razón social, Denominación" required>
-                <div class="valid-feedback">
-                    Bien!
-                </div>
+                <label>Razón social</label>
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre,Razón social, Denominación">
+                @error('nombre')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label for="validationCustom02">Dirección</label>
-                <input type="text" name="direccion" class="form-control" id="validationCustom02"
-                    placeholder="Calle o Avenida" required>
-                <div class="valid-feedback">
-                    Bien!
-                </div>
+                <label>Dirección</label>
+                <input type="text" name="direccion" class="form-control" placeholder="Calle o Avenida">
+                @error('direccion')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
+
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationCustom02">Departamento</label>
@@ -36,62 +39,79 @@
                         <option value="{{ $departamentos->id }}">{{ $departamentos->nombre }}</option>
                     @endforeach
                 </select>
-                <div class="invalid-feedback">Example invalid custom select feedback</div>
+                @error('dpto_id')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
 
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">Celular</label>
-                <input type="text" name="celular" class="form-control" id="validationCustom01" placeholder="Celular"
-                    required>
-                <div class="valid-feedback">
-                    Bien!
-                </div>
+                <input type="text" name="celular" class="form-control" id="validationCustom01" placeholder="Celular">
+                @error('celular')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationCustom02">Telefono</label>
-                <input type="text" name="telefono" class="form-control" id="validationCustom02" placeholder="Telefono"
-                    required>
-                <div class="valid-feedback">
-                    Bien!
-                </div>
+                <input type="text" name="telefono" class="form-control" id="validationCustom02" placeholder="Telefono">
+                @error('telefono')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">Pagina Web</label>
                 <input type="text" name="url_pagina" class="form-control" id="validationCustom01"
-                    placeholder="www.example.com" required>
-                <div class="valid-feedback">
-                    Bien!
-                </div>
+                    placeholder="www.example.com">
+                @error('url_pagina')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">Objeto de la Empresa</label>
                 <input type="text" name="descripcion" class="form-control" id="validationCustom01"
-                    placeholder="A que se dedica la empresa" required>
-                <div class="valid-feedback">
-                    Bien!
-                </div>
+                    placeholder="A que se dedica la empresa">
+                @error('descripcion')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">Nit</label>
                 <input type="text" name="nit" class="form-control" id="validationCustom01"
-                    placeholder="Número de identificación tributaria" required>
-                <div class="valid-feedback">
-                    Bien!
-                </div>
+                    placeholder="Número de identificación tributaria">
+                @error('nit')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">Logo de la empresa</label>
                 <input type="file" accept="image/*" name="image">
+                @error('logo')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-5 mb-3">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
                     <label class="form-check-label" for="invalidCheck">//
                         Estoy de acuerdo con los terminos y condiciones
                     </label>

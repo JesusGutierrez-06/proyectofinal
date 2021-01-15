@@ -9,4 +9,9 @@ class Salario extends Model
 {
     use HasFactory;
     protected $table='salario';
+    protected $fillable = [
+        'id',
+        'nombre',
+        'estado',
+    ];
 }

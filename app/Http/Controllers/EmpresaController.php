@@ -48,7 +48,17 @@ class EmpresaController extends Controller
     // }
     public function store(Request $request){
         // return $request->all();
-        
+        $request->validate([
+            'dpto_id' =>'required',
+            'nombre' => 'required',
+            'direccion'=> 'required',
+            'url_pagina' => 'required',
+            'descripcion' => 'required|string|max:500',
+            'celular' => 'required|numeric|min:8',
+            'nit'=>'required|numeric',
+            'logo' => 'image'
+        ]);
+
         $empresa = new Empresa();
         $empresa->dpto_id =$request->dpto_id;
         $empresa->nombre = ucwords(strtolower($request->nombre));
@@ -93,10 +103,17 @@ class EmpresaController extends Controller
         $empresa= explode(':',$empresa);
         
         if (count($empresa)>1) {
+            $tmp = $empresa[1];
             $empresa = Empresa::Where('users_id','=',$empresa[1])->first();
         }else{
             $empresa = Empresa::Where('id','=',$empresa[0])->first();
         }
+        if (empty($empresa)){
+            // dd($tmp);
+            return redirect()->route('empresa.create',$tmp );
+            // return view('empresa.create', compact('tmp'));
+        }
+
         $departamento = Departamento::All();
         // dd($empresa);
         return view('empresa.edit', compact('empresa','departamento'));
@@ -122,12 +139,23 @@ class EmpresaController extends Controller
         $empresa->save();
         return redirect()->route('empresa.index');
     }
-    public function destroy( Empresa $empresa){
-
-        $empresa->estado =0;
+    public function destroy(Request $request, Empresa $empresa){
+        $empresa->estado= $request->estado;
         // dd($empresa);
         $empresa->save();
-        return redirect()->route('empresa.index');
+        return redirect()->route('empresa.index')->with('eliminar','ok');
+    }
+    public function graficos(){
+        $data = DB::table('oferta_laboral')
+            ->join('empresa', 'empresa.id', '=', 'oferta_laboral.empresa_id')
+            ->select(
+                'oferta_laboral.*',
+                'empresa.nombre as empresa'
+            )
+            ->orderBy('empresa.id', 'asc')
+            ->get();
+            // dd($data);
+        return view('reportes.graficos', compact('data'));
     }
     public function imprimir(){
         $data= DB::table('empresa')
@@ -135,7 +163,8 @@ class EmpresaController extends Controller
         ->select('empresa.*','departamento.nombre as departamento')
         ->get();
         $pdf = Facade::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
-        $pdf = Facade::loadView('reportes.empresa', compact('data'));
+        $pdf = Facade::loadView('reportes.empresa', compact('data'))
+        ->setPaper('letter');
         // dd($data);
         return $pdf->stream('filename.pdf');
         // view()->share('data',$data);

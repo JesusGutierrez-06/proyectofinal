@@ -72,6 +72,7 @@ Route::get('reportes/estudiante', [EstudianteController::class,'imprimir'])->nam
 Route::get('reportes/{reportes}/curriculum', [EstudianteController::class,'curriculum'])->name('reportes.curriculum');
 Route::get('reportes/empresa', [EmpresaController::class,'imprimir'])->name('reportes.empresa');
 Route::get('reportes/ofertas', [OfertaController::class,'imprimir'])->name('reportes.ofertas');
+Route::get('reportes/graficos', [EmpresaController::class,'graficos'])->name('reportes.graficos');
 
 Route::get('contacto', [ContactoController::class,'index'])->name('contacto.index');
 Route::get('contacto/{contacto}/create', [ContactoController::class,'create'])->name('contacto.create');
