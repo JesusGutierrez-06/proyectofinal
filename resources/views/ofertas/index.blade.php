@@ -11,7 +11,7 @@
     <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
         <i class="fa fa-search" aria-hidden="true"></i>
         <input class="form-control form-control-sm ml-3 w-75" name="buscar" value="{{ $buscar }}" type="text"
-            placeholder="Search" aria-label="Search">
+            placeholder="Buscar por Titulo, Empresas" aria-label="Search">
     </form>
     <br>
     <div class="card-columns">

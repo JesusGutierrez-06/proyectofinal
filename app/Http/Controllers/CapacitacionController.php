@@ -12,6 +12,15 @@ class CapacitacionController extends Controller
     
     public function store(Request $request){
         // return $request->all();
+        $request->validate([
+            'estudiante_id' =>'required',
+            'tipo_capa_id' =>'required',
+            'area_capa_id' =>'required',
+            'nombre' => 'required',
+            'institucion' => 'required',
+            'fechainicio' => 'required|date',
+            'fechafin' => 'required|date'
+        ]);
         $estudiante= Estudiante::where('users_id','=',Auth::user()->id)->first();        
         $capacitacion = new Capacitacion();
         $capacitacion->estudiante_id = $estudiante->id;

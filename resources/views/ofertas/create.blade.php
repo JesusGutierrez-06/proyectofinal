@@ -16,10 +16,20 @@
             <div class="col-md-4 mb-3">
                 <label>Titulo de la oferta laboral</label>
                 <input type="text" class="form-control" name="titulo" placeholder="Nombre de la oferta laboral">
+                @error('titulo')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label>Celular</label>
-                <input type="number" class="form-control" name="celular" placeholder="Celular">
+                <input type="text" class="form-control" name="celular" placeholder="Celular">
+                @error('celular')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label>Telefono</label>
@@ -33,10 +43,22 @@
             <div class="col-md-2 mb-3">
                 <label>Vacantes</label>
                 <input type="number" class="form-control" name="vacantes" placeholder="# cantidad de vacantes">
+                @error('vacantes')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
+
             </div>
             <div class="col-md-2 mb-3">
                 <label>Fecha de Vencimiento</label>
-                <input type="text" class="form-control" name="vencimiento" placeholder="Fecha limite de oferta">
+                <input type="date" class="form-control" min="{{ $todos['fecha'] }}" name="vencimiento"
+                    placeholder="Fecha limite de oferta">
+                @error('vencimiento')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
             </div>
             <div class="col-md-2 mb-3">
                 <label>Tipo de Pago</label>
@@ -46,6 +68,12 @@
                         <option value="{{ $tipo_sueldo->id }}">{{ $tipo_sueldo->nombre }}</option>
                     @endforeach
                 </select>
+                @error('tipo_sueldo_id')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
+
             </div>
             <div class="col-md-2 mb-3">
                 <label>Tipo de contrato</label>
@@ -55,6 +83,12 @@
                         <option value="{{ $contrato->id }}">{{ $contrato->nombre }}</option>
                     @endforeach
                 </select>
+                @error('contrato_id')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
+
             </div>
             <div class="col-md-2 mb-3">
                 <label>Salario</label>
@@ -64,6 +98,12 @@
                         <option value="{{ $salario->id }}">{{ $salario->nombre }}</option>
                     @endforeach
                 </select>
+                @error('salario_id')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
+
             </div>
             <div class="col-md-2 mb-3">
                 <label>Carrera</label>
@@ -73,6 +113,12 @@
                         <option value="{{ $carrera->id }}">{{ $carrera->nombre }}</option>
                     @endforeach
                 </select>
+                @error('carrera_id')
+                    <br>
+                    <small>* {{ $message }}</small>
+                    <br>
+                @enderror
+
             </div>
         </div>
         <div class="form-row">

@@ -9,4 +9,9 @@ class AreaCapa extends Model
 {
     use HasFactory;
     protected $table='area_capa';
+    protected $fillable = [
+        'id',
+        'nombre',
+        'estado',
+    ];
 }

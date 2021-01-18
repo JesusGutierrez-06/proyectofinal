@@ -1,11 +1,8 @@
 @extends(Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : (Auth::user()->tipo_usuario_id == '2' ?
 'estudiante.layout' : 'layout'))
 @section('title', 'Registro Candidato')
-
 @section('contenido')
-
     @if (!empty($data['exp_laboral'][0]))
-
         <center>
             <h3>
                 Listado de mis Experiencias Laborales
@@ -91,16 +88,31 @@
                     <div class="col-md-6 mb-3">
                         <label>Institución</label>
                         <input type="text" class="form-control" name="institucion" placeholder="Nombre de la institución">
+                        @error('institucion')
+                            <br>
+                            <small>* {{ $message }}</small>
+                            <br>
+                        @enderror
                     </div>
                     <div class="col-md-6 mb-3">
                         <label>Descripción del cargo</label>
                         <input type="text" class="form-control" name="descripcion" placeholder="Funciones que realizaba">
+                        @error('descripcion')
+                            <br>
+                            <small>* {{ $message }}</small>
+                            <br>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label>Cargo</label>
                         <input type="text" class="form-control" name="puesto" placeholder="Actividad a realizar">
+                        @error('puesto')
+                            <br>
+                            <small>* {{ $message }}</small>
+                            <br>
+                        @enderror
                     </div>
                     <div class="col-md-6 mb-3">
                         <label>Area Laboral</label>
@@ -110,18 +122,32 @@
                                 <option value="{{ $area_laboral->id }}">{{ $area_laboral->nombre }}</option>
                             @endforeach
                         </select>
+                        @error('area_laboral_id')
+                            <br>
+                            <small>* {{ $message }}</small>
+                            <br>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label>Fecha de Inscripción</label>
-                        <input type="text" class="form-control" name="fechainicial" placeholder="YYYY-mm-dd">
+                        <input  type="date" max="{{ $data['fecha'] }}" class="form-control" name="fechainicial" placeholder="YYYY-mm-dd">
+                        @error('fechainicial')
+                            <br>
+                            <small>* {{ $message }}</small>
+                            <br>
+                        @enderror
                     </div>
                     <div class="col-md-6 mb-3">
                         <label>Fecha de Finalización</label>
-                        <input type="text" class="form-control" name="fechafin" placeholder="YYYY-mm-dd">
+                        <input type="date" class="form-control" name="fechafin" placeholder="YYYY-mm-dd">
+                        @error('fechafin')
+                            <br>
+                            <small>* {{ $message }}</small>
+                            <br>
+                        @enderror
                     </div>
-
                 </div>
                 <div class="form-row">
                     <div class="col-md-5 mb-3">
@@ -160,6 +186,11 @@
                                 <option value="{{ $idioma->id }}">{{ $idioma->nombre }}</option>
                             @endforeach
                         </select>
+                        @error('idioma_id')
+                            <br>
+                            <small>* {{ $message }}</small>
+                            <br>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
@@ -171,6 +202,11 @@
                             <option value="Intermedio">Intermedio</option>
                             <option value="Avanzado">Avanzado</option>
                         </select>
+                        @error('hablar')
+                            <br>
+                            <small>* {{ $message }}</small>
+                            <br>
+                        @enderror
                     </div>
                     <div class="col-md-4 mb-3">
                         <label>Escribir</label>
@@ -180,6 +216,11 @@
                             <option value="Intermedio">Intermedio</option>
                             <option value="Avanzado">Avanzado</option>
                         </select>
+                        @error('escribir')
+                            <br>
+                            <small>* {{ $message }}</small>
+                            <br>
+                        @enderror
                     </div>
                     <div class="col-md-4 mb-3">
                         <label>Leer</label>
@@ -189,6 +230,11 @@
                             <option value="Intermedio">Intermedio</option>
                             <option value="Avanzado">Avanzado</option>
                         </select>
+                        @error('leer')
+                            <br>
+                            <small>* {{ $message }}</small>
+                            <br>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">

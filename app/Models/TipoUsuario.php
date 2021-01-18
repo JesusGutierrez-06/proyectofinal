@@ -9,4 +9,9 @@ class TipoUsuario extends Model
 {
     use HasFactory;
     protected $table='tipo_usuario';
+    protected $fillable = [
+        'id',
+        'nombre',
+        'estado',
+    ];
 }

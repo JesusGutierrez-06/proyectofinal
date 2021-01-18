@@ -8,13 +8,19 @@
         <a class="btn btn-sm btn-danger" href="{{ route('reportes.estudiante') }}">PDF</a>
         <ul class="navbar-nav ml-auto float-right">
             <li class="nav-item">
-                <a class="nav-link" data-widget="navbar-search" href="{{ route('admin.create') }}" role="button">
-                    <i class="fas fa-user-plus icon">Nuevo Usuario</i>
+                <a class="nav-link icon" href="{{ route('admin.create') }}" role="button">
+                    <i class="fas fa-user-plus"></i>Nuevo Usuario
                 </a>
                 <div class="navbar-search-block">
                     <form class="form-inline">
+                        <select name="tipo" class="from-control mr-sm-2">
+                            <option>Buscar por</option>
+                            <option value="nombre">Nombres</option>
+                            <option value="apellidop">Apellido Paterno</option>
+                            <option value="dni">Carnet</option>
+                        </select>
                         <div class="input-group input-group-sm ">
-                            <input name="buscar" class="form-control form-control-navbar" type="search" placeholder="Search"
+                            <input name="buscar" class="form-control form-control-navbar" type="search" placeholder="Buscar por Nombre, Apellido, DNI"
                                 aria-label="Search" value="{{ $buscar }}">
                             <div class="input-group-append">
                                 <button class="btn btn-navbar" type="submit">

@@ -1327,7 +1327,7 @@ $.validator.addMethod( "require_from_group", function( value, element, options )
 		$fields.data( "being_validated", false );
 	}
 	return isValid;
-}, $.validator.format( "Please fill at least {0} of these fields." ) );
+}, $.validator.format( "Complete al menos {0} de estos campos." ) );
 
 /*
  * Lets you say "either at least X inputs that match selector Y must be filled,

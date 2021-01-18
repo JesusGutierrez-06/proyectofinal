@@ -9,4 +9,9 @@ class EstadoCivil extends Model
 {
     use HasFactory;
     protected $table='estado_civil';
+    protected $fillable = [
+        'id',
+        'nombre',
+        'estado',
+    ];
 }

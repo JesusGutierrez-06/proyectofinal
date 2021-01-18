@@ -18,6 +18,11 @@ class PostularOfertaController extends Controller
 
         if(Auth::user()->tipo_usuario_id == '2'){
             $estudiante =Estudiante::where('users_id','=',Auth::user()->id)->first();
+            if (empty($estudiante)){
+                // dd($tmp);
+                return redirect()->route('estudiante.create', Auth::user()->id);
+                // return view('empresa.create', compact('tmp'));
+            }
             $data = DB::table('postular_oferta')
             ->join('oferta_laboral','oferta_laboral.id','=','postular_oferta.oferta_laboral_id')
             ->join('empresa','empresa.id','=','oferta_laboral.empresa_id')
@@ -35,6 +40,11 @@ class PostularOfertaController extends Controller
 
         }elseif(Auth::user()->tipo_usuario_id == '3'){
             $empresa =Empresa::where('users_id','=',Auth::user()->id)->first();
+            if (empty($empresa)){
+                // dd($empresa);
+                return redirect()->route('empresa.create', Auth::user()->id);
+                // return view('empresa.create', compact('tmp'));
+            }
             $data = DB::table('oferta_laboral')
             ->join('carrera', 'carrera.id', '=', 'oferta_laboral.carrera_id')
             ->join('tipo_sueldo', 'tipo_sueldo.id', '=', 'oferta_laboral.tipo_sueldo_id')
@@ -55,9 +65,12 @@ class PostularOfertaController extends Controller
             )
             ->where('empresa.id','=',$empresa->id)
             ->where('oferta_laboral.estado','=',1)
+            // aqui es hasta la fecha de vencimiento
+            ->where('oferta_laboral.vencimiento','>=',date(now()))
             ->orderBy('oferta_laboral.id', 'asc')
-            ->get();
-                foreach ($data as $user) {
+            ->paginate(4);
+            $cantidad=[];
+            foreach ($data as $user) {
                     // $cantidad = PostularOferta::find($user->oferta_laboral_id);
             $cantidad[] = DB::table('postular_oferta')
             ->join('oferta_laboral', 'oferta_laboral.id', '=', 'postular_oferta.oferta_laboral_id')
@@ -70,7 +83,6 @@ class PostularOfertaController extends Controller
 
                 }
                 return view('ofertas.postular_oferta.index', compact('data','cantidad'));
-
             }
 
         // dd(count($cantidad[0]));
@@ -112,8 +124,7 @@ class PostularOfertaController extends Controller
     {
         // $data = PostularOferta::all()->where('oferta_laboral_id','=',$postular_oferta)->where('estudiante_id','=','2');
         // dd($estudiante);
-        $empresa = Empresa::where('users_id','=',Auth::user()->id)->first();
-        
+        $empresa = Empresa::where('users_id','=',Auth::user()->id)->first();        
         $data = DB::table('postular_oferta')
             ->join('estudiante', 'estudiante.id', '=', 'postular_oferta.estudiante_id')
             ->join('oferta_laboral', 'oferta_laboral.id', '=', 'postular_oferta.oferta_laboral_id')
@@ -145,7 +156,6 @@ class PostularOfertaController extends Controller
     }
     public function update(Request $request, $postular_oferta)
     {
-
         $oferta = $request->oferta_laboral_id;
         $postular_oferta = PostularOferta::find($postular_oferta);
         $postular_oferta->estado_preseleccion = $request->preseleccion;

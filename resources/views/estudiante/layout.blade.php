@@ -138,18 +138,16 @@
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-
                                     <x-jet-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault();
          this.closest('form').submit();">
-                                        {{ __('Logout') }}
+                                      <i  class="fa fa-power-off"></i>  {{ __('Desconectar') }}
                                     </x-jet-responsive-nav-link>
                                 </form>
-
                             </li>
-                            <li><a href="/estudiante_login"><i class="fa fa-file"></i>&nbsp; Datos de Usuario</a></li>
+                            {{-- <li><a href="/estudiante_login"><i class="fa fa-file"></i>&nbsp; Datos de Usuario</a></li>
                             <li><a href="/estudiante_usuario"><i class="fa fa-edit"></i>&nbsp;Modificar datos de
-                                    Usuario</a></li>
-                            <li>
+                                    Usuario</a></li> --}}
+                            {{-- <li>
                                 <form action="{{ route('admin.destroy', Auth::user()->id) }}" class="formulario"
                                     method="post">
                                     @csrf @method('DELETE')
@@ -158,7 +156,7 @@
                                             class="fa fa-user-times"></i>&nbsp; Dar de baja mi cuenta
                                     </button>
                                 </form>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>

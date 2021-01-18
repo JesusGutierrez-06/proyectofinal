@@ -9,4 +9,9 @@ class Carrera extends Model
 {
     use HasFactory;
     protected $table='carrera';
+    protected $fillable = [
+        'id',
+        'nombre',
+        'estado',
+    ];
 }

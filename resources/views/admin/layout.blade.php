@@ -41,22 +41,29 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                   </li>
                   <li class="nav-item ">
-                    <a href="{{route('estudiante.index')}}" class="fa fa-graduation-cap nav-link ">Estudiante</a>       
+                    <a class="nav-link" href="{{route('estudiante.index')}}">
+                        <i class="fa fa-graduation-cap"></i>Estudiante
+                    </a>       
                   </li>
                   <li class="nav-item ">
-                    <a href="{{route('empresa.index')}}" class=" fa fa-building nav-link ">Empresa</a>       
+                    <a class="nav-link" href="{{route('empresa.index')}}">
+                        <i class="fa fa-building"></i>Empresa
+                    </a>       
                   </li>
                   <li class="nav-item ">
-                    <a href="{{route('admin.index')}}" class="fa fa-users nav-link ">Usuarios</a>    
+                    <a class="nav-link" href="{{route('admin.index')}}">
+                        <i  class="fa fa-users"></i> Usuarios
+                    </a>
                 </li>
+
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
     
-                        <x-jet-responsive-nav-link href="{{ route('logout') }}"
+                        <x-jet-responsive-nav-link href="{{ route('logout') }}" class="nav-link"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                            {{ __('Logout') }}
+                            <i  class="fa fa-power-off"></i>{{ __('Desconectar') }}
                         </x-jet-responsive-nav-link>
                     </form>
                 </li>
@@ -160,7 +167,21 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
+                
+                <li class="nav-item">
+                    {{-- <a class="nav-link" href="<hp if($_SERVER["HTTP_REFERER"]){ echo $_SERVER["HTTP_REFERER"];}else{ ?> {{route('estudiante.index')}}< }?>" role="button"> --}}
+                    <a class="nav-link" href="<?php if(isset($_SERVER['HTTP_REFERER'])){
+                      $hola= $_SERVER['HTTP_REFERER'];
+                      echo $hola;
+                    }else{
+                        ?> {{route('estudiante.index')}} <?php
+                    }
+                    ?>" role="button">
+
+                        <i  class="fas fa-undo" ></i>Volver
+                    </a>
+                </li>
+                                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
@@ -255,9 +276,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{route('reportes.graficos')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Postulantes</p>
+                                        <p>Gráficos</p>
                                     </a>
                                 </li>
                             </ul>

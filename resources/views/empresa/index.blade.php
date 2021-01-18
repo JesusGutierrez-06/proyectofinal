@@ -1,5 +1,5 @@
 @extends('admin.layout')
-@section('title', 'Registro Empresa')
+@section('title', 'Empresa')
 @section('contenido')
 <div class="card-header">
     <center>
@@ -12,8 +12,14 @@
         </a>
         <div class="navbar-search-block">
             <form class="form-inline">
-                <div class="input-group input-group-sm ">
-                    <input name="buscar" class="form-control form-control-navbar" type="search" placeholder="Search"
+                <select name="tipo" class="from-control mr-sm-2">
+                    <option>Buscar por</option>
+                    <option value="nombre">Nombres</option>
+                    <option value="url_pagina">Pagina Web</option>
+                    <option value="nit">NIT</option>
+                </select>
+                               <div class="input-group input-group-sm ">
+                    <input name="buscar" class="form-control form-control-navbar" type="search" placeholder="Buscar"
                         aria-label="Search" value="{{ $buscar }}">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
@@ -108,7 +114,6 @@
                 'El registro se ha eliminado.',
                 'success'
             )
-
         </script>
     @endif
     <script>
@@ -134,7 +139,5 @@
 
             })
         }
-
-    </script> --}}
-
+    </script> 
 @endsection

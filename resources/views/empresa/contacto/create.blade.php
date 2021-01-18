@@ -1,4 +1,5 @@
-@extends('admin.layout')
+@extends(Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : (Auth::user()->tipo_usuario_id == '3' ?
+'empresa.layout' : 'layout'))
 @section('title','Registro Empresa')
     
 @section('contenido')
@@ -11,26 +12,32 @@
     <input type="hidden" name="empresa_id" value="{{$todos['empresa']}}">
 <div class="form-row">
   <div class="col-md-3 mb-3">
-    <label for="validationCustom01">Nombre de representante legal</label>
-    <input type="text" class="form-control" name="nombre" id="validationCustom01" placeholder="Nombre de representante legal o propietario" required>
-    <div class="valid-feedback">
-      Bien!
-    </div>
+    <label >Nombre de representante legal</label>
+    <input type="text" class="form-control" name="nombre" placeholder="Nombre de representante legal o propietario">
+    @error('nombre')
+          <br>
+          <small>* {{$message}}</small>
+          <br>
+      @enderror
   </div>
 
   <div class="col-md-3 mb-3">
-    <label for="validationCustom02">Celular</label>
-    <input type="text" maxlength="8" name="celular" class="form-control" id="validationCustom02" placeholder="Celular" required>
-    <div class="valid-feedback">
-      Bien!
-    </div>
+    <label >Celular</label>
+    <input type="text" maxlength="8" name="celular" class="form-control" placeholder="Celular">
+    @error('celular')
+          <br>
+          <small>* {{$message}}</small>
+          <br>
+      @enderror
   </div>
   <div class="col-md-3 mb-3">
     <label for="validationCustom02">Telefono</label>
-    <input type="text" maxlength="9" name="telefono" class="form-control" id="validationCustom02" placeholder="Telefono" required>
-    <div class="valid-feedback">
-      Bien!
-    </div>
+    <input type="text" maxlength="9" name="telefono" class="form-control" id="validationCustom02" placeholder="Telefono" >
+    @error('telefono')
+          <br>
+          <small>* {{$message}}</small>
+          <br>
+      @enderror
   </div>
 </div>
 <div class="form-row">

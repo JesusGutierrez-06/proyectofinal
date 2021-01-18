@@ -96,22 +96,57 @@
             text-align: center;
         }
 
+
+        @page {
+            margin: 1cm 1cm;
+            font-family: Arial;
+        }
+
+        body {
+            margin: 4cm 2cm 2cm;
+        }
+
+        header {
+            position: fixed;
+            top: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 150px;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 2cm;
+            text-align: center;
+            line-height: 35px;
+        }
+
+
     </style>
 </head>
 
 <body>
 
-    <div class="form-row">
-        <div class="card-3">
-            <img src="{{ public_path('static/assets/img/logos.png') }}" alt="Logo">
+    <header>
+        <div class="form-row">
+            <div class="card-3">
+                <img src="{{ public_path('static/assets/img/logos.png') }}" alt="Logo">
+            </div>
+            <div class="card-7 position">
+                <h1>INSTITUTO TÉCNICO ENSEC "FELIPE LEONOR RIBERA"</h1>
+                <h1> Calle La Paz Esq. Ñuflo de Chávez Nº159</h1>
+            </div>
         </div>
-        <div class="card-7 position">
-            <h1>INSTITUTO TÉCNICO ENSEC "FELIPE LEONOR RIBERA"</h1>
-            <h1> Calle La Paz Esq. Ñuflo de Chávez Nº159</h1>
-        </div>
-    </div>
-    <br>
-    <center>
+    
+    </header>
+    
+    <main>
+   <center>
         <h1>Lista de Usuarios Registrados</h1>
     </center>
 
@@ -143,6 +178,18 @@
             @endforeach
         </tbody>
     </table>
+</main>
     
+<footer>
+    <script type="text/php">
+        if ( isset($pdf) ) {
+            $pdf->page_script('
+                $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
+                $pdf->text(680, 560, "Pagina $PAGE_NUM de $PAGE_COUNT", $font, 10);
+            ');
+        }
+    </script>
+</footer>
+
 </body>
 </html>

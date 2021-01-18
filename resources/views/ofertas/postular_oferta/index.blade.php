@@ -1,7 +1,6 @@
 @extends(Auth::user()->tipo_usuario_id == '1' ? 'admin.layout' : (Auth::user()->tipo_usuario_id == '2' ?
 'estudiante.layout' : (Auth::user()->tipo_usuario_id == '3' ? 'empresa.layout' : 'layout')))
 @section('title', 'Registro Candidato')
-
 @section('contenido')
     <center>
         <h3>
@@ -25,7 +24,7 @@
     <tbody>
         @foreach ($data as $user)
             <tr>
-                <th>{{ $user->titulo }}</th>
+                <th><a style="color: black;" href="{{route('ofertas.show',$user->id)}}">{{ $user->titulo }}</a></th>
                 <td>{{ $user->empresa }}</td>
                 <td>{{ $user->departamento }}</td>
                 <td>{{ $user->fecha_postulacion }}</td>
@@ -69,10 +68,10 @@
         @foreach ($data as $user)
             <tr>
                 <th>{{ $user->titulo }}</th>
-                <td>{{ $user->descripcion}}</td>
-                <td>{{ $user->publicado }}</td>
+                <td style="width: 40%;">{{ $user->descripcion}}</td>
+                <td style="width: 10%;">{{ $user->publicado }}</td>
                 <td>{{ $user->vencimiento }}</td>
-                <td>{{ $user->salario}}</td>
+                <td  style="width: 10%;">{{ $user->salario}}</td>
                 <td>{{ $user->carrera}}</td>
                 <td><a href="{{ route('postular.show', $user->id) }}">
                     <img src="{{asset('/static/assets/img/Candidatos.png')}}"><br>

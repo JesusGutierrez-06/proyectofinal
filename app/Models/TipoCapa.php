@@ -9,4 +9,9 @@ class TipoCapa extends Model
 {
     use HasFactory;
     protected $table='tipo_capa';
+    protected $fillable = [
+        'id',
+        'nombre',
+        'estado',
+    ];
 }

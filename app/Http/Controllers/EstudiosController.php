@@ -16,6 +16,7 @@ use App\Models\AreaCapa;
 use App\Models\Carrera;
 use App\Models\Estudios;
 use App\Models\TipoCapa;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +24,13 @@ class EstudiosController extends Controller
 {
     public function index(Request $request){
         $estudiante= Estudiante::where('users_id','=',Auth::user()->id)->first();
+        if (empty($estudiante)){
+            // dd($tmp);
+            return redirect()->route('estudiante.create', Auth::user()->id);
+            // return view('estudiante.create', compact('tmp'));
+        
+        }
+
         $buscar= $request->get('buscar');
         $data['estudios']= DB::table('estudios')
         ->join('carrera','carrera.id','=','estudios.carrera_id')
@@ -43,6 +51,9 @@ class EstudiosController extends Controller
         $data['carrera']= Carrera::all();
         $data['tipo_capa'] = TipoCapa::all();
         $data['area_capa'] = AreaCapa::all();
+
+        $todo = Carbon::now();
+        $data['fecha']= $todo->format('Y-m-d');
         // return dd($data);
         // $data = Admin::All();
         // dd($data['capacitacion']);        
@@ -54,6 +65,16 @@ class EstudiosController extends Controller
     }
     public function store(Request $request){
         // return $request->all();
+        // return $request->all();
+        $request->validate([
+            'estudiante_id' => 'required',
+            'carrera_id' => 'required',
+            'semestre' => 'required',
+            'institucion'=> 'required',
+            'fechainicio'=>'required|date',
+            'fechafin' => 'date'
+        ]);
+
         $estudiante= Estudiante::where('users_id','=',Auth::user()->id)->first();        
         $estudios = new Estudios();
         $estudios->estudiante_id = $estudiante->id;
