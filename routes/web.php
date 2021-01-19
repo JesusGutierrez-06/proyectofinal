@@ -5,6 +5,7 @@ use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\OfertaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\PostularOfertaController;
 use App\Http\Controllers\EstudiosController;
@@ -73,6 +74,9 @@ Route::get('reportes/{reportes}/curriculum', [EstudianteController::class,'curri
 Route::get('reportes/empresa', [EmpresaController::class,'imprimir'])->name('reportes.empresa');
 Route::get('reportes/ofertas', [OfertaController::class,'imprimir'])->name('reportes.ofertas');
 Route::get('reportes/graficos', [EmpresaController::class,'graficos'])->name('reportes.graficos');
+
+Route::get('backups/index', [BackupController::class,'index'])->name('backups.index');
+Route::get('backups/create', [BackupController::class,'create'])->name('backups.create');
 
 Route::get('contacto', [ContactoController::class,'index'])->name('contacto.index');
 Route::get('contacto/{contacto}/create', [ContactoController::class,'create'])->name('contacto.create');
