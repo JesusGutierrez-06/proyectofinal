@@ -74,9 +74,12 @@ Route::get('reportes/{reportes}/curriculum', [EstudianteController::class,'curri
 Route::get('reportes/empresa', [EmpresaController::class,'imprimir'])->name('reportes.empresa');
 Route::get('reportes/ofertas', [OfertaController::class,'imprimir'])->name('reportes.ofertas');
 Route::get('reportes/graficos', [EmpresaController::class,'graficos'])->name('reportes.graficos');
+<<<<<<< HEAD
 
 Route::get('backups/index', [BackupController::class,'index'])->name('backups.index');
 Route::get('backups/create', [BackupController::class,'create'])->name('backups.create');
+=======
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
 
 Route::get('contacto', [ContactoController::class,'index'])->name('contacto.index');
 Route::get('contacto/{contacto}/create', [ContactoController::class,'create'])->name('contacto.create');

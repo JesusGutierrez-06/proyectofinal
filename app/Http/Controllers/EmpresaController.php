@@ -59,6 +59,7 @@ class EmpresaController extends Controller
     {
         // return $request->all();
         $request->validate([
+<<<<<<< HEAD
             'dpto_id' => 'required',
             'nombre' => 'required',
             'direccion' => 'required',
@@ -66,6 +67,15 @@ class EmpresaController extends Controller
             'descripcion' => 'required|string|max:500',
             'celular' => 'required|numeric|min:8',
             'nit' => 'required|numeric',
+=======
+            'dpto_id' =>'required',
+            'nombre' => 'required',
+            'direccion'=> 'required',
+            'url_pagina' => 'required',
+            'descripcion' => 'required|string|max:500',
+            'celular' => 'required|numeric|min:8',
+            'nit'=>'required|numeric',
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
             'logo' => 'image'
         ]);
 
@@ -110,6 +120,7 @@ class EmpresaController extends Controller
         return view('empresa.show', compact('data'));
     }
 
+<<<<<<< HEAD
     public function edit($empresa)
     {
         $empresa = explode(':', $empresa);
@@ -125,6 +136,22 @@ class EmpresaController extends Controller
             return redirect()->route('empresa.create', $tmp);
             // return view('empresa.create', compact('tmp'));
         }
+=======
+    public function edit($empresa){
+        $empresa= explode(':',$empresa);
+        
+        if (count($empresa)>1) {
+            $tmp = $empresa[1];
+            $empresa = Empresa::Where('users_id','=',$empresa[1])->first();
+        }else{
+            $empresa = Empresa::Where('id','=',$empresa[0])->first();
+        }
+        if (empty($empresa)){
+            // dd($tmp);
+            return redirect()->route('empresa.create',$tmp );
+            // return view('empresa.create', compact('tmp'));
+        }
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
 
         $departamento = Departamento::All();
         // dd($empresa);
@@ -152,6 +179,7 @@ class EmpresaController extends Controller
         $empresa->save();
         return redirect()->route('empresa.index');
     }
+<<<<<<< HEAD
     public function destroy(Request $request, Empresa $empresa)
     {
         $empresa->estado = $request->estado;
@@ -209,6 +237,25 @@ class EmpresaController extends Controller
         }
         // dd($cantidades);
         return view('reportes.graficos', compact('data', 'cantidades'));
+=======
+    public function destroy(Request $request, Empresa $empresa){
+        $empresa->estado= $request->estado;
+        // dd($empresa);
+        $empresa->save();
+        return redirect()->route('empresa.index')->with('eliminar','ok');
+    }
+    public function graficos(){
+        $data = DB::table('oferta_laboral')
+            ->join('empresa', 'empresa.id', '=', 'oferta_laboral.empresa_id')
+            ->select(
+                'oferta_laboral.*',
+                'empresa.nombre as empresa'
+            )
+            ->orderBy('empresa.id', 'asc')
+            ->get();
+            // dd($data);
+        return view('reportes.graficos', compact('data'));
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
     }
     public function imprimir()
     {
@@ -218,7 +265,11 @@ class EmpresaController extends Controller
             ->get();
         $pdf = Facade::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
         $pdf = Facade::loadView('reportes.empresa', compact('data'))
+<<<<<<< HEAD
             ->setPaper('letter');
+=======
+        ->setPaper('letter');
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
         // dd($data);
         return $pdf->stream('filename.pdf');
         // view()->share('data',$data);

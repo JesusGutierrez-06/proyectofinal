@@ -140,14 +140,22 @@
                                     @csrf
                                     <x-jet-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault();
          this.closest('form').submit();">
+<<<<<<< HEAD
                                       <i  class="fa fa-power-off"></i>  {{ __('Desconectar') }}
+=======
+                                        {{ __('Desconectar') }}
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
                                     </x-jet-responsive-nav-link>
                                 </form>
                             </li>
                             {{-- <li><a href="/estudiante_login"><i class="fa fa-file"></i>&nbsp; Datos de Usuario</a></li>
                             <li><a href="/estudiante_usuario"><i class="fa fa-edit"></i>&nbsp;Modificar datos de
                                     Usuario</a></li> --}}
+<<<<<<< HEAD
                             {{-- <li>
+=======
+                            <li>
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
                                 <form action="{{ route('admin.destroy', Auth::user()->id) }}" class="formulario"
                                     method="post">
                                     @csrf @method('DELETE')

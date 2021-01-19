@@ -41,6 +41,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                   </li>
                   <li class="nav-item ">
+<<<<<<< HEAD
                     <a class="nav-link" href="{{route('estudiante.index')}}">
                         <i class="fa fa-graduation-cap"></i>Estudiante
                     </a>       
@@ -49,6 +50,12 @@
                     <a class="nav-link" href="{{route('empresa.index')}}">
                         <i class="fa fa-building"></i>Empresa
                     </a>       
+=======
+                    <a href="{{route('estudiante.index')}}"><i class="fa fa-graduation-cap nav-link "> Estudiante</i></a>       
+                  </li>
+                  <li class="nav-item ">
+                    <a href="{{route('empresa.index')}}"><i class="fa fa-building nav-link ">Empresa</i></a>       
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
                   </li>
                   <li class="nav-item ">
                     <a class="nav-link" href="{{route('admin.index')}}">

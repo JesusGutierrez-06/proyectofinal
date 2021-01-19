@@ -13,12 +13,16 @@ use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use PhpParser\Node\Expr\BinaryOp\Concat;
+=======
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
 
 class EstudianteController extends Controller
 {
     public function index(Request $request)
     {
+<<<<<<< HEAD
         $tipo = $request->get('tipo');
         $buscar = $request->get('buscar');
         if (empty($tipo)) {
@@ -27,6 +31,9 @@ class EstudianteController extends Controller
             $tipo="nombre";
             $buscar="";
         }
+=======
+        $buscar = $request->get('buscar');
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
         $data = DB::table('estudiante')
             ->join('provincia', 'provincia.id', '=', 'estudiante.provincia_id')
             ->join('tipo_sangre', 'tipo_sangre.id', '=', 'estudiante.tipo_sangre_id')
@@ -41,7 +48,11 @@ class EstudianteController extends Controller
                 'genero.nombre as genero',
                 'estado_civil.nombre as estado_civil'
             )
+<<<<<<< HEAD
             ->Where('estudiante.'.$tipo.'', 'like', '%' . $buscar . '%')
+=======
+            ->where('estudiante.nombre', 'like', '%' . $buscar . '%')
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
             ->orderBy('estudiante.id', 'asc')
             ->paginate(5);
         // return dd($data);

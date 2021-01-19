@@ -99,9 +99,16 @@
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
+<<<<<<< HEAD
                                     <x-jet-responsive-nav-link class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                this.closest('form').submit();">
                                     <i  class="fa fa-power-off"></i>{{ __('Desconectar') }}
+=======
+                                    <i class="fa fa-users"></i>&nbsp;
+                                    <x-jet-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault();
+               this.closest('form').submit();">
+                                        {{ __('Desconectar') }}
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
                                     </x-jet-responsive-nav-link>
                                 </form>
 
@@ -110,7 +117,11 @@
                                         class="fa fa-file"></i>&nbsp; Datos de Usuario</a></li>
                             <li><a href="/empresa_usuario"><i class="fa fa-edit"></i>&nbsp;Modificar datos de
                                     Usuario</a></li> --}}
+<<<<<<< HEAD
                             {{-- <li>
+=======
+                            <li>
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
                                 <form action="{{ route('admin.destroy', Auth::user()->id) }}" class="formulario"
                                     method="post">
                                     @csrf @method('DELETE')
@@ -119,7 +130,11 @@
                                             class="fa fa-user-times"></i>&nbsp; Dar de baja mi cuenta
                                     </button>
                                 </form>
+<<<<<<< HEAD
                             </li> --}}
+=======
+                            </li>
+>>>>>>> a0fafc9f8242f00d39a4ebffc22d8efb2b11d03b
                         </ul>
                     </div>
                 </div>
